@@ -3,4 +3,4 @@ project(set)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(set main.cpp set.h list.cpp list.h)
+add_executable(set main.cpp set.h list.h)

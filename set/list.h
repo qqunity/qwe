@@ -2,7 +2,6 @@
 #define SET_LIST_H
 
     #include <zconf.h>
-    #include "list.cpp"
     #include <iostream>
     #include <algorithm>
 
