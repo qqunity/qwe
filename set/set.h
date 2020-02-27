@@ -4,6 +4,9 @@
 
 #ifndef SET_SET_H
 #define SET_SET_H
+
+    #include "list.h"
+
     template <typename T>
     class Set {
     private:

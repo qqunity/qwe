@@ -1,4 +1,3 @@
-
 #ifndef MATRIX_V2_0_TEST_H
 #define MATRIX_V2_0_TEST_H
     #include <stdio.h>
@@ -48,7 +47,7 @@
                 printf("TEST: [%d]\t|\tERROR CODE: [%d]\t|\tSTATUS: [ERR]\t|\tDESCRIPTION: [%s]\n", i + 1, (s_err->error_code)[i], (s_err->error_description)[i]);
             }
             else {
-                printf("TEST: [%d]\t|\tERROR CODE: [%d]\t|\tSTATUS: [OK]\n", i + 1, (s_err->error_code)[i]);
+                printf("TEST: [%d]\t|\tSTATUS: [OK]\n", i + 1, (s_err->error_code)[i]);
             }
         }
     }
