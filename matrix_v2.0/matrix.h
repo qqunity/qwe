@@ -410,7 +410,7 @@
         }
     }
 
-    void multip_mat_by_a_scalar(matrix **a, void * t, matrix **b, char tt){
+    void multip_mat_by_a_scalar(matrix **a, void *t, matrix **b, char tt){
         matrix *pa = *a;
         matrix *pb = *b;
         void *aval;

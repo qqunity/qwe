@@ -22,7 +22,7 @@
         List();
         ~List();
         List(const List&);
-        void append(T);
+        virtual void append(T);
         void pop(int);
         void print_list();
         void del();
