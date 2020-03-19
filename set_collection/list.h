@@ -5,6 +5,7 @@
     #include <iostream>
     #include <algorithm>
     #include "list_element.h"
+    #include "binary_heap.h"
 
     template <typename T>
     class List {
@@ -26,16 +27,106 @@
         T get_firts();
         T get_last();
         T get_element(int);
+        int get_index(T);
         void set_element(int, T);
         int length();
         void insert(int, T);
-        List<T>& operator = (const List<T>&);
+        Array<T> conver_to_array();
+        List<T> sorted(const std::string&);
+        List<T> &operator = (const List<T>&);
         List<T> operator + (const List<T>&);
         bool operator == (const List<T>&);
         bool operator != (const List<T>&);
+        T operator [] (int);
+        class ListIterator {
+        private:
+            ListElement<T> *cur_o;
+        public:
+            ListIterator(ListElement<T> *);
+            ListElement<T> &operator + (int );
+            ListElement<T> &operator - (int );
+            ListElement<T> &operator ++ (int);
+            ListElement<T> &operator -- (int);
+            ListElement<T> &operator ++ ();
+            ListElement<T> &operator -- ();
+            ListElement<T> &operator = (ListElement<T>&);
+            bool operator != (const ListIterator&);
+            bool operator == (const ListIterator&);
+            ListElement<T> &operator * ();
+        };
+        ListIterator begin();
+        ListIterator end();
     };
 
     template<typename T>
+    List<T>::ListIterator::ListIterator(ListElement<T> *first_o) {
+        cur_o = first_o;
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator+(int n) {
+        ListElement<T> *buff = cur_o;
+        for (int i = 0; i < n; ++i){
+            buff = buff->get_next();
+        }
+        return *buff;
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator-(int n) {
+        ListElement<T> *buff = cur_o;
+        for (int i = 0; i < n; ++i){
+            buff = buff->get_prev();
+        }
+        return *buff;
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator++(int) {
+        cur_o = cur_o->get_next();
+        return *(cur_o->get_prev);
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator--(int) {
+        cur_o = cur_o->get_prev();
+        return *(cur_o->get_next());
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator++() {
+        cur_o = cur_o->get_next();
+        return *(cur_o);
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator--() {
+        cur_o = cur_o->get_prev();
+        return *(cur_o);
+    }
+
+    template<typename T>
+    bool List<T>::ListIterator::operator!=(const List::ListIterator &It) {
+        return cur_o != It.cur_o;
+    }
+
+    template<typename T>
+    bool List<T>::ListIterator::operator==(const List::ListIterator &It) {
+        return cur_o == It.cur_o;
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator*() {
+        return *cur_o;
+    }
+
+    template<typename T>
+    ListElement<T> &List<T>::ListIterator::operator=(ListElement<T> &It) {
+        cur_o = &It;
+        return *cur_o;
+    }
+
+template<typename T>
     List<T>::List() {
         head = nullptr;
         tail = nullptr;
@@ -45,13 +136,13 @@
     template<typename T>
     void List<T>::append(T value) {
         if (head == nullptr){
-            auto *buff = new ListElement<T>(value);
+            auto buff = new ListElement<T>(value);
             head = buff;
             tail = buff;
             ++count;
         }
         else {
-            auto *buff = new ListElement<T>(value);
+            auto buff = new ListElement<T>(value);
             buff->set_next(nullptr);
             buff->set_prev(tail);
             tail->set_next(buff);
@@ -166,7 +257,7 @@
         ++index;
         if (index - 1 == 0){
             ListElement<T> *buff = head;
-            auto *s_buff = new ListElement<T>(value);
+            auto s_buff = new ListElement<T>(value);
             buff->set_prev(s_buff);
             s_buff->set_next(buff);
             s_buff->set_prev(nullptr);
@@ -175,7 +266,7 @@
         }
         else if (index - 1 == count - 1){
             ListElement<T> *buff = tail;
-            auto *s_buff = new ListElement<T>(value);
+            auto s_buff = new ListElement<T>(value);
             buff->set_next(s_buff);
             s_buff->set_prev(buff);
             s_buff->set_next(nullptr);
@@ -188,7 +279,7 @@
                 buff = buff->get_next();
             }
             ListElement<T> *next_buff = buff->get_next();
-            auto *s_buff = new ListElement<T>(value);
+            auto s_buff = new ListElement<T>(value);
             buff->set_next(s_buff);
             s_buff->set_prev(buff);
             s_buff->set_next(next_buff);
@@ -306,6 +397,66 @@
             tail = s_buff;
             ++count;
         }
+    }
+
+    template<typename T>
+    int List<T>::get_index(T val) {
+        ListElement<T> *buff = head;
+        int i = 0;
+        while (buff != nullptr){
+            if (buff->get_data() == val) {
+                return i;
+            }
+            buff = buff->get_next();
+            ++i;
+        }
+        return -1;
+    }
+
+    template<typename T>
+    Array<T> List<T>::conver_to_array() {
+        Array<T> arr;
+        ListElement<T> *buff = head;
+        while (buff != nullptr){
+            arr.append(buff->get_data());
+            buff = buff->get_next();
+        }
+        return arr;
+    }
+
+    template<typename T>
+    List<T> List<T>::sorted(const std::string& order) {
+        Array<T> arr((*this).conver_to_array());
+        BinaryHeap<T> b_h(arr);
+        if (order == "ASC") {
+            List<T> l_buff;
+            for (int i = 0; i < count; ++i){
+                l_buff.append(b_h.extract_min());
+            }
+            return l_buff;
+        }
+        else if (order == "DESC"){
+            List<T> l_buff;
+            for (int i = 0; i < count; ++i){
+                l_buff.prepend(b_h.extract_min());
+            }
+            return l_buff;
+        }
+    }
+
+    template<typename T>
+    typename List<T>::ListIterator List<T>::begin() {
+        return head;
+    }
+
+    template<typename T>
+    typename List<T>::ListIterator List<T>::end() {
+        return tail->get_next();
+    }
+
+    template<typename T>
+    T List<T>::operator[](int index) {
+        return get_element(index);
     }
 
 

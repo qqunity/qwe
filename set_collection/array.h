@@ -26,16 +26,91 @@
         void insert(int, T);
         void set_element(int, T);
         void print_array();
-//        void heap_sorted(const std::string&);
-        Array<T>& operator = (const Array<T>&);
+//        void sorted(const std::string&);
+        Array<T> &operator = (const Array<T>&);
         Array<T> operator + (const Array<T>&);
         bool operator == (const Array<T>&);
         bool operator != (const Array<T>&);
+        T operator [] (int);
         Array<T> operator * (int);
         int length();
+        class ArrIterator {
+        private:
+            ArrayElement<T> *cur_o;
+        public:
+            ArrIterator(ArrayElement<T> *);
+            ArrayElement<T> &operator + (int );
+            ArrayElement<T> &operator - (int );
+            ArrayElement<T> &operator ++ (int);
+            ArrayElement<T> &operator -- (int);
+            ArrayElement<T> &operator ++ ();
+            ArrayElement<T> &operator -- ();
+            ArrayElement<T> &operator = (ArrayElement<T>&);
+            bool operator != (const ArrIterator&);
+            bool operator == (const ArrIterator&);
+            ArrayElement<T> &operator * ();
+        };
+        ArrIterator begin();
+        ArrIterator end();
     };
 
     template<typename T>
+    Array<T>::ArrIterator::ArrIterator(ArrayElement<T> *first_o) {
+        cur_o = first_o;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator+(int n) {
+        return *(cur_o + n);
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator-(int n) {
+        return *(cur_o - n);
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator++(int) {
+        return *cur_o++;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator--(int) {
+        return *cur_o--;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator++() {
+        return *++cur_o;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator--() {
+        return *--cur_o;
+    }
+
+    template<typename T>
+    bool Array<T>::ArrIterator::operator!=(const Array::ArrIterator &It) {
+        return cur_o != It.cur_o;
+    }
+
+    template<typename T>
+    bool Array<T>::ArrIterator::operator==(const Array::ArrIterator &It) {
+        return cur_o == It.cur_o;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator*() {
+        return *cur_o;
+    }
+
+    template<typename T>
+    ArrayElement<T> &Array<T>::ArrIterator::operator=(ArrayElement<T> &It) {
+        cur_o = &It;
+        return *cur_o;
+    }
+
+template<typename T>
     Array<T>::Array() {
         data = nullptr;
         count = 0;
@@ -265,8 +340,24 @@ template<typename T>
         return -1;
     }
 
+    template<typename T>
+    T Array<T>::operator[](int index) {
+        return data[index].get_value();
+    }
+
+    template<typename T>
+    typename Array<T>::ArrIterator Array<T>::begin() {
+        return data;
+    }
+
+    template<typename T>
+    typename Array<T>::ArrIterator Array<T>::end() {
+        return data + count;
+    }
+
+
 //    template<typename T>
-//    void Array<T>::heap_sorted(const std::string& order) {
+//    void Array<T>::sorted(const std::string& order) {
 //        if (order == "ASC") {
 //        }
 //        else if (order == "DESC"){

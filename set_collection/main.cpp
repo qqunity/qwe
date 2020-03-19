@@ -1,19 +1,16 @@
-#include "binary_heap.h"
+#include "list.h"
 
 int main() {
-    Array<int> a;
-    int n;
-    std::cin >> n;
-    int buff;
-    for (int i = 0; i < n; ++i){
-        std::cin >> buff;
-        a.append(buff);
+    List<int> a;
+    for (int i = 0; i < 7; ++i){
+        a.append(i);
     }
-    BinaryHeap<int> b(a);
-    Array<int> c;
-    for (int i = 0; i < a.length(); ++i){
-        c.append(b.extract_min());
+    for (ListElement<int> val : a){
+        std::cout << val.get_data() << " ";
     }
-    c.print_array();
+    std::cout << std::endl;
+    for (int i = 0; i < 7; ++i){
+        std::cout << a[i] << " ";
+    }
     return 0;
 }
