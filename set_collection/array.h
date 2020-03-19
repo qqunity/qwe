@@ -2,6 +2,7 @@
 #define SET_COLLECTION_ARRAY_H
 
     #include "array_element.h"
+    #include <string>
 
     template <typename T>
     class Array{
@@ -19,13 +20,18 @@
         void swap(int, int);
         Array<T> reversed();
         T get_element(int);
+        int get_index(T);
         T get_first();
         T get_last();
         void insert(int, T);
         void set_element(int, T);
         void print_array();
+//        void heap_sorted(const std::string&);
         Array<T>& operator = (const Array<T>&);
         Array<T> operator + (const Array<T>&);
+        bool operator == (const Array<T>&);
+        bool operator != (const Array<T>&);
+        Array<T> operator * (int);
         int length();
     };
 
@@ -213,6 +219,61 @@ template<typename T>
         }
         return buff;
     }
+
+    template<typename T>
+    bool Array<T>::operator==(const Array<T> &Arr) {
+        if (this->count != Arr.count){
+            return false;
+        }
+        for (int i = 0; i < this->count; ++i){
+            if (this->data[i].get_value() != Arr.data[i].get_value()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    template<typename T>
+    bool Array<T>::operator!=(const Array<T> &Arr) {
+        return !(*this == Arr);
+    }
+
+    template<typename T>
+    Array<T> Array<T>::operator*(int k) {
+        if (k == 0){
+            this->del();
+            return *this;
+        }
+        else {
+            Array<T> buff;
+            for (int j = 0; j < k; ++j){
+                for (int i = 0; i < this->count; ++i){
+                    buff.append(this->data[i].get_value());
+                }
+            }
+            return buff;
+        }
+    }
+
+    template<typename T>
+    int Array<T>::get_index(T val) {
+        for (int i = 0; i < count; ++i){
+            if (data[i].get_value() == val){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+//    template<typename T>
+//    void Array<T>::heap_sorted(const std::string& order) {
+//        if (order == "ASC") {
+//        }
+//        else if (order == "DESC"){
+//
+//        }
+//    }
+
 
 
 #endif
