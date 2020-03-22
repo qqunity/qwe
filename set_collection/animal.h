@@ -15,7 +15,7 @@
         Animal(const Animal&);
         ~Animal();
         std::string get_name();
-        int get_height();
+        int get_height() const;
         std::string get_type();
         void set_name(std::string);
         void set_height(int);
@@ -43,7 +43,7 @@
         return this->a_name;
     }
 
-    int Animal::get_height() {
+    int Animal::get_height() const {
         return this->a_height;
     }
 
