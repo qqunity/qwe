@@ -26,12 +26,15 @@
         void swap(int, int);
         T get_firts();
         T get_last();
+        ListElement<T> *get_head_ptr();
+        ListElement<T> *get_tail_ptr();
         T get_element(int);
+        ListElement<T> *get_element_ptr(int);
         int get_index(T);
         void set_element(int, T);
         int length();
         void insert(int, T);
-        Array<T> conver_to_array();
+        Array<T> convert_to_array();
         List<T> sorted(const std::string&);
         List<T> &operator = (const List<T>&);
         List<T> operator + (const List<T>&);
@@ -45,8 +48,8 @@
             ListIterator(ListElement<T> *);
             ListElement<T> &operator + (int );
             ListElement<T> &operator - (int );
-            ListElement<T> &operator ++ (int);
-            ListElement<T> &operator -- (int);
+            ListElement<T> operator ++ (int);
+            ListElement<T> operator -- (int);
             ListElement<T> &operator ++ ();
             ListElement<T> &operator -- ();
             ListElement<T> &operator = (ListElement<T>&);
@@ -56,17 +59,18 @@
         };
         ListIterator begin();
         ListIterator end();
+        template<typename T1> friend std::ostream& operator<< (std::ostream &, const List<T1> &);
     };
 
     template<typename T>
     List<T>::ListIterator::ListIterator(ListElement<T> *first_o) {
-        cur_o = first_o;
+        this->cur_o = first_o;
     }
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator+(int n) {
-        ListElement<T> *buff = cur_o;
-        for (int i = 0; i < n; ++i){
+        ListElement<T> *buff = this->cur_o;
+        for (int i = 0; i < n && buff != nullptr; ++i){
             buff = buff->get_next();
         }
         return *buff;
@@ -74,125 +78,125 @@
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator-(int n) {
-        ListElement<T> *buff = cur_o;
-        for (int i = 0; i < n; ++i){
+        ListElement<T> *buff = this->cur_o;
+        for (int i = 0; i < n && buff != nullptr; ++i){
             buff = buff->get_prev();
         }
         return *buff;
     }
 
     template<typename T>
-    ListElement<T> &List<T>::ListIterator::operator++(int) {
-        cur_o = cur_o->get_next();
-        return *(cur_o->get_prev);
+    ListElement<T> List<T>::ListIterator::operator++(int) {
+        this->cur_o = this->cur_o->get_next();
+        return *(this->cur_o->get_prev);
     }
 
     template<typename T>
-    ListElement<T> &List<T>::ListIterator::operator--(int) {
-        cur_o = cur_o->get_prev();
-        return *(cur_o->get_next());
+    ListElement<T> List<T>::ListIterator::operator--(int) {
+        this->cur_o = this->cur_o->get_prev();
+        return *(this->cur_o->get_next());
     }
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator++() {
-        cur_o = cur_o->get_next();
-        return *(cur_o);
+        this->cur_o = this->cur_o->get_next();
+        return *(this->cur_o);
     }
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator--() {
-        cur_o = cur_o->get_prev();
-        return *(cur_o);
+        this->cur_o = this->cur_o->get_prev();
+        return *(this->cur_o);
     }
 
     template<typename T>
     bool List<T>::ListIterator::operator!=(const List::ListIterator &It) {
-        return cur_o != It.cur_o;
+        return this->cur_o != It.cur_o;
     }
 
     template<typename T>
     bool List<T>::ListIterator::operator==(const List::ListIterator &It) {
-        return cur_o == It.cur_o;
+        return this->cur_o == It.cur_o;
     }
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator*() {
-        return *cur_o;
+        return *this->cur_o;
     }
 
     template<typename T>
     ListElement<T> &List<T>::ListIterator::operator=(ListElement<T> &It) {
-        cur_o = &It;
-        return *cur_o;
+        this->cur_o = &It;
+        return *this->cur_o;
     }
 
 template<typename T>
     List<T>::List() {
-        head = nullptr;
-        tail = nullptr;
-        count = 0;
+        this->head = nullptr;
+        this->tail = nullptr;
+        this->count = 0;
     }
 
     template<typename T>
     void List<T>::append(T value) {
-        if (head == nullptr){
+        if (this->head == nullptr){
             auto buff = new ListElement<T>(value);
-            head = buff;
-            tail = buff;
-            ++count;
+            this->head = buff;
+            this->tail = buff;
+            ++this->count;
         }
         else {
             auto buff = new ListElement<T>(value);
             buff->set_next(nullptr);
-            buff->set_prev(tail);
-            tail->set_next(buff);
-            tail = buff;
-            ++count;
+            buff->set_prev(this->tail);
+            this->tail->set_next(buff);
+            this->tail = buff;
+            ++this->count;
         }
     }
 
     template<typename T>
     void List<T>::pop(int index) {
-        if (index == 0 && count != 1){
-            head = head->get_next();
-            delete head->get_prev();
-            head->set_prev(nullptr);
-            --count;
+        if (index == 0 && this->count != 1){
+            this->head = this->head->get_next();
+            delete this->head->get_prev();
+            this->head->set_prev(nullptr);
+            --this->count;
         }
-        else if (index == count - 1 && count != 1){
-            tail = tail->get_prev();
-            delete tail->get_next();
-            tail->set_next(nullptr);
-            --count;
+        else if (index == this->count - 1 && this->count != 1){
+            this->tail = this->tail->get_prev();
+            delete this->tail->get_next();
+            this-> tail->set_next(nullptr);
+            --this->count;
         }
         else if(count == 1){
-            --count;
-            tail = nullptr;
-            delete head;
+            --this->count;
+            this->tail = nullptr;
+            delete this->head;
         }
         else {
             index += 1;
-            ListElement<T> *buff = head;
+            ListElement<T> *buff = this->head;
             for (int i = 1; i < index; ++i) {
                 buff = buff->get_next();
             }
             (buff->get_prev())->set_next(buff->get_next());
             (buff->get_next())->set_prev(buff->get_prev());
-            --count;
+            --this->count;
             delete buff;
         }
     }
 
     template<typename T>
     void List<T>::print_list() {
-        if (count == 0){
+        if (this->count == 0){
             std::cout << "null";
         }
         else {
-            ListElement<T> *buff = head;
+            ListElement<T> *buff = this->head;
             std::cout << "[";
-            for (int i = 0; i < count; ++i) {
-                if (i == count - 1){
+            for (int i = 0; i < this->count; ++i) {
+                if (i == this->count - 1){
                     std::cout << buff->get_data();
                 }
                 else {
@@ -214,8 +218,8 @@ template<typename T>
         }
         ++index1;
         ++index2;
-        ListElement<T> *buff1 = head;
-        ListElement<T> *buff2 = head;
+        ListElement<T> *buff1 = this->head;
+        ListElement<T> *buff2 = this->head;
         for (int i = 1; i < index1; ++i){
             buff1 = buff1->get_next();
         }
@@ -229,18 +233,18 @@ template<typename T>
 
     template<typename T>
     T List<T>::get_firts() {
-        return head->get_data();
+        return this->head->get_data();
     }
 
     template<typename T>
     T List<T>::get_last() {
-        return tail->get_data();
+        return this->tail->get_data();
     }
 
     template<typename T>
     T List<T>::get_element(int index) {
         ++index;
-        ListElement<T> *buff = head;
+        ListElement<T> *buff = this->head;
         for (int i = 1; i < index; ++i) {
             buff = buff->get_next();
         }
@@ -249,32 +253,32 @@ template<typename T>
 
     template<typename T>
     int List<T>::length() {
-        return count;
+        return this->count;
     }
 
     template<typename T>
     void List<T>::insert(int index, T value) {
         ++index;
         if (index - 1 == 0){
-            ListElement<T> *buff = head;
+            ListElement<T> *buff = this->head;
             auto s_buff = new ListElement<T>(value);
             buff->set_prev(s_buff);
             s_buff->set_next(buff);
             s_buff->set_prev(nullptr);
-            head = s_buff;
-            ++count;
+            this->head = s_buff;
+            ++this->count;
         }
-        else if (index - 1 == count - 1){
-            ListElement<T> *buff = tail;
+        else if (index - 1 == this->count - 1){
+            ListElement<T> *buff = this->tail;
             auto s_buff = new ListElement<T>(value);
             buff->set_next(s_buff);
             s_buff->set_prev(buff);
             s_buff->set_next(nullptr);
-            tail = s_buff;
-            ++count;
+            this->tail = s_buff;
+            ++this->count;
         }
         else {
-            ListElement<T> *buff = head;
+            ListElement<T> *buff = this->head;
             for (int i = 1; i < index - 1; ++i) {
                 buff = buff->get_next();
             }
@@ -284,17 +288,17 @@ template<typename T>
             s_buff->set_prev(buff);
             s_buff->set_next(next_buff);
             next_buff->set_prev(s_buff);
-            ++count;
+            ++this->count;
         }
     }
 
     template<typename T>
     List<T>::List(const List<T> &L) {
-        head = tail = nullptr;
-        count = 0;
+        this->head = this->tail = nullptr;
+        this->count = 0;
         ListElement<T> *buff = L.head;
         while (buff != nullptr) {
-            this->append(buff->get_data());
+            append(buff->get_data());
             buff = buff->get_next();
         }
     }
@@ -307,7 +311,7 @@ template<typename T>
         this->~List<T>();
         ListElement<T> *buff = L.head;
         while (buff != nullptr){
-            this->append(buff->get_data());
+            append(buff->get_data());
             buff = buff->get_next();
         }
         return *this;
@@ -326,9 +330,9 @@ template<typename T>
 
     template<typename T>
     bool List<T>::operator==(const List<T> &L2) {
-        ListElement<T> *ptr_L1 = (*this).head;
+        ListElement<T> *ptr_L1 = this->head;
         ListElement<T> *ptr_L2 = L2.head;
-        if ((*this).count != L2.count){
+        if (this->count != L2.count){
             return false;
         }
         while (ptr_L1 != nullptr && ptr_L2 != nullptr){
@@ -349,7 +353,7 @@ template<typename T>
     template<typename T>
     List<T> List<T>::reversed() {
         List<T> new_L;
-        ListElement<T> *buff = tail;
+        ListElement<T> *buff = this->tail;
         while (buff != nullptr){
             new_L.append(buff->get_data());
             buff = buff->get_prev();
@@ -359,7 +363,7 @@ template<typename T>
 
     template<typename T>
     void List<T>::del() {
-        while (count != 0){
+        while (this->count != 0){
             pop(0);
         }
     }
@@ -371,7 +375,7 @@ template<typename T>
 
     template<typename T>
     void List<T>::set_element(int index, T value) {
-        ListElement<T> *buff = head;
+        ListElement<T> *buff = this->head;
         for (int i = 0; i < index; ++i){
             buff = buff->get_next();
         }
@@ -380,28 +384,28 @@ template<typename T>
 
     template<typename T>
     void List<T>::prepend(T val) {
-        if (count != 0) {
-            ListElement<T> *buff = head;
+        if (this->count != 0) {
+            ListElement<T> *buff = this->head;
             auto *s_buff = new ListElement<T>(val);
             s_buff->set_prev(nullptr);
             s_buff->set_next(buff);
             buff->set_prev(s_buff);
-            head = s_buff;
-            ++count;
+            this->head = s_buff;
+            ++this->count;
         }
         else {
             auto *s_buff = new ListElement<T>(val);
             s_buff->set_prev(nullptr);
             s_buff->set_next(nullptr);
-            head = s_buff;
-            tail = s_buff;
-            ++count;
+            this->head = s_buff;
+            this->tail = s_buff;
+            ++this->count;
         }
     }
 
     template<typename T>
     int List<T>::get_index(T val) {
-        ListElement<T> *buff = head;
+        ListElement<T> *buff = this->head;
         int i = 0;
         while (buff != nullptr){
             if (buff->get_data() == val) {
@@ -414,9 +418,9 @@ template<typename T>
     }
 
     template<typename T>
-    Array<T> List<T>::conver_to_array() {
+    Array<T> List<T>::convert_to_array() {
         Array<T> arr;
-        ListElement<T> *buff = head;
+        ListElement<T> *buff = this->head;
         while (buff != nullptr){
             arr.append(buff->get_data());
             buff = buff->get_next();
@@ -426,7 +430,7 @@ template<typename T>
 
     template<typename T>
     List<T> List<T>::sorted(const std::string& order) {
-        Array<T> arr((*this).conver_to_array());
+        Array<T> arr((*this).convert_to_array());
         BinaryHeap<T> b_h(arr);
         if (order == "ASC") {
             List<T> l_buff;
@@ -446,17 +450,58 @@ template<typename T>
 
     template<typename T>
     typename List<T>::ListIterator List<T>::begin() {
-        return head;
+        return this->head;
     }
 
     template<typename T>
     typename List<T>::ListIterator List<T>::end() {
-        return tail->get_next();
+        return this->tail->get_next();
     }
 
     template<typename T>
     T List<T>::operator[](int index) {
         return get_element(index);
+    }
+
+    template<typename T1>
+    std::ostream &operator<<(std::ostream &out, const List<T1> &L) {
+        if (L.count == 0){
+            out << "null";
+        }
+        else {
+            auto buff = L.head;
+            out << "[";
+            for (int i = 0; i < L.count; ++i) {
+                if (i == L.count - 1){
+                    out << buff->get_data();
+                }
+                else {
+                    out << buff->get_data() << ", ";
+                }
+                buff = buff->get_next();
+            }
+            out << "]";
+        }
+        return out;
+    }
+
+    template<typename T>
+    ListElement<T> *List<T>::get_head_ptr() {
+        return this->head;
+    }
+
+    template<typename T>
+    ListElement<T> *List<T>::get_tail_ptr() {
+        return this->tail;
+    }
+
+    template<typename T>
+    ListElement<T> *List<T>::get_element_ptr(int index) {
+        ListElement<T> *buff = this->head;
+        for (int i = 0; i < index; ++i){
+            buff = buff->get_next();
+        }
+        return buff;
     }
 
 

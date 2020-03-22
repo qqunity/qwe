@@ -1,16 +1,19 @@
-#include "list.h"
+#include "animal.h"
 
 int main() {
-    List<int> a;
-    for (int i = 0; i < 7; ++i){
-        a.append(i);
-    }
-    for (ListElement<int> val : a){
-        std::cout << val.get_data() << " ";
-    }
-    std::cout << std::endl;
-    for (int i = 0; i < 7; ++i){
-        std::cout << a[i] << " ";
-    }
+    Animal a;
+    a.set_name("Gosha");
+    a.set_height(104);
+    a.set_type("tigr");
+    Animal b;
+    b.set_name("Pusya");
+    b.set_height(205);
+    b.set_type("koshka");
+    List<Animal> l;
+    l.append(a);
+    l.append(b);
+    std::cout << l << std::endl;
+    List<Animal> ls(l.sorted("DESC"));
+    std::cout << ls;
     return 0;
 }

@@ -10,7 +10,7 @@
         Array<T> data;
         int size;
     public:
-        BinaryHeap(Array<T>);
+        explicit BinaryHeap(Array<T>);
         void print_b_heap();
         void sift_down(int);
         void sift_up(int);
@@ -76,7 +76,7 @@
 
     template<typename T>
     T BinaryHeap<T>::extract_min() {
-        int mn = data.get_element(0);
+        T mn = data.get_element(0);
         data.set_element(0, data[data.length() - 1]);
         data.pop(data.length() - 1);
         heapify();

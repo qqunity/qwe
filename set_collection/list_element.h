@@ -7,7 +7,7 @@
         ListElement<T> *prev;
         T data;
     public:
-        ListElement(T);
+        explicit ListElement(T);
         ~ListElement();
         ListElement<T> *get_next();
         ListElement<T> *get_prev();
@@ -19,39 +19,39 @@
 
     template<typename T>
     ListElement<T>::ListElement(T val) {
-        next = nullptr;
-        prev = nullptr;
-        data = val;
+        this->next = nullptr;
+        this->prev = nullptr;
+        this->data = val;
     }
 
     template<typename T>
     ListElement<T> *ListElement<T>::get_next() {
-        return next;
+        return this->next;
     }
 
     template<typename T>
     ListElement<T> *ListElement<T>::get_prev() {
-        return prev;
+        return this->prev;
     }
 
     template<typename T>
     T ListElement<T>::get_data() {
-        return data;
+        return this->data;
     }
 
     template<typename T>
     void ListElement<T>::set_data(T val) {
-        data = val;
+        this->data = val;
     }
 
     template<typename T>
     void ListElement<T>::set_prev(ListElement<T> *p_prev) {
-        prev = p_prev;
+        this->prev = p_prev;
     }
 
     template<typename T>
     void ListElement<T>::set_next(ListElement<T> *p_next) {
-        next = p_next;
+        this->next = p_next;
     }
 
 template<typename T>
