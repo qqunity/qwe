@@ -2,19 +2,19 @@
 #define SET_COLLECTION_LIST_ELEMENT_H
     template <typename T>
     class ListElement{
-    private:
-        ListElement<T> *next;
-        ListElement<T> *prev;
-        T data;
-    public:
-        explicit ListElement(T);
-        ~ListElement();
-        ListElement<T> *get_next();
-        ListElement<T> *get_prev();
-        void set_prev(ListElement<T> *);
-        void set_next(ListElement<T> *);
-        T get_data();
-        void set_data(T);
+        private:
+            ListElement<T> *next;
+            ListElement<T> *prev;
+            T data;
+        public:
+            explicit ListElement(T);
+            ~ListElement();
+            ListElement<T> *get_next();
+            ListElement<T> *get_prev();
+            void set_prev(ListElement<T> *);
+            void set_next(ListElement<T> *);
+            T get_data();
+            void set_data(T);
     };
 
     template<typename T>

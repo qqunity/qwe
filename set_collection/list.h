@@ -9,57 +9,57 @@
 
     template <typename T>
     class List {
-    private:
-        ListElement<T> *head;
-        ListElement<T> *tail;
-        int count;
-    public:
-        List();
-        ~List();
-        List(const List<T>&);
-        void append(T);
-        void prepend(T);
-        void pop(int);
-        void print_list();
-        void del();
-        List<T> reversed();
-        void swap(int, int);
-        T get_firts();
-        T get_last();
-        ListElement<T> *get_head_ptr();
-        ListElement<T> *get_tail_ptr();
-        T get_element(int);
-        ListElement<T> *get_element_ptr(int);
-        int get_index(T);
-        void set_element(int, T);
-        int length();
-        void insert(int, T);
-        Array<T> convert_to_array();
-        List<T> sorted(const std::string&);
-        List<T> &operator = (const List<T>&);
-        List<T> operator + (const List<T>&);
-        bool operator == (const List<T>&);
-        bool operator != (const List<T>&);
-        T operator [] (int);
-        class ListIterator {
         private:
-            ListElement<T> *cur_o;
+            ListElement<T> *head;
+            ListElement<T> *tail;
+            int count;
         public:
-            ListIterator(ListElement<T> *);
-            ListElement<T> &operator + (int );
-            ListElement<T> &operator - (int );
-            ListElement<T> operator ++ (int);
-            ListElement<T> operator -- (int);
-            ListElement<T> &operator ++ ();
-            ListElement<T> &operator -- ();
-            ListElement<T> &operator = (ListElement<T>&);
-            bool operator != (const ListIterator&);
-            bool operator == (const ListIterator&);
-            ListElement<T> &operator * ();
-        };
-        ListIterator begin();
-        ListIterator end();
-        template<typename T1> friend std::ostream& operator<< (std::ostream &, const List<T1> &);
+            List();
+            ~List();
+            List(const List<T> &);
+            void append(T);
+            void prepend(T);
+            void pop(int);
+            void print_list();
+            void del();
+            List<T> reversed();
+            void swap(int, int);
+            T get_first();
+            T get_last();
+            ListElement<T> *get_head_ptr();
+            ListElement<T> *get_tail_ptr();
+            T get_element(int);
+            ListElement<T> *get_element_ptr(int);
+            int get_index(T);
+            void set_element(int, T);
+            int length();
+            void insert(int, T);
+            Array<T> convert_to_array();
+            List<T> sorted(const std::string &);
+            List<T> &operator = (const List<T> &);
+            List<T> operator + (const List<T> &);
+            bool operator == (const List<T> &);
+            bool operator != (const List<T> &);
+            T operator [] (int);
+            class ListIterator {
+            private:
+                ListElement<T> *cur_o;
+            public:
+                ListIterator(ListElement<T> *);
+                ListElement<T> &operator + (int );
+                ListElement<T> &operator - (int );
+                ListElement<T> operator ++ (int);
+                ListElement<T> operator -- (int);
+                ListElement<T> &operator ++ ();
+                ListElement<T> &operator -- ();
+                ListElement<T> &operator = (ListElement<T> &);
+                bool operator != (const ListIterator &);
+                bool operator == (const ListIterator &);
+                ListElement<T> &operator * ();
+            };
+            ListIterator begin();
+            ListIterator end();
+            template<typename T1> friend std::ostream& operator<< (std::ostream &, const List<T1> &);
     };
 
     template<typename T>
@@ -232,7 +232,7 @@ template<typename T>
     }
 
     template<typename T>
-    T List<T>::get_firts() {
+    T List<T>::get_first() {
         return this->head->get_data();
     }
 
@@ -503,6 +503,5 @@ template<typename T>
         }
         return buff;
     }
-
 
 #endif

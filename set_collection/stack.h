@@ -5,18 +5,18 @@
 
     template<typename  T>
     class Stack{
-    private:
-        Array<T> s_data;
-        int s_size;
-    public:
-        Stack();
-        ~Stack();
-        int size();
-        bool empty();
-        ArrayElement<T> *top();
-        void push(T);
-        void pop();
-        void print_stack();
+        private:
+            Array<T> s_data;
+            int s_size;
+        public:
+            Stack();
+            ~Stack();
+            int size();
+            bool empty();
+            ArrayElement<T> *top();
+            void push(T);
+            void pop();
+            void print_stack();
     };
 
     template<typename T>

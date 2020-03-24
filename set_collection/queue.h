@@ -5,19 +5,19 @@
 
     template<typename T>
     class Queue {
-    private:
-        List<T> q_data;
-        int q_size;
-    public:
-        Queue();
-        ~Queue();
-        ListElement<T> *font();
-        ListElement<T> *back();
-        bool empty();
-        int size();
-        void push(T);
-        void pop();
-        void print_queue();
+        private:
+            List<T> q_data;
+            int q_size;
+        public:
+            Queue();
+            ~Queue();
+            ListElement<T> *front();
+            ListElement<T> *back();
+            bool empty();
+            int size();
+            void push(T);
+            void pop();
+            void print_queue();
     };
 
     template<typename T>
@@ -32,7 +32,7 @@
     }
 
     template<typename T>
-    ListElement<T> *Queue<T>::font() {
+    ListElement<T> *Queue<T>::front() {
         return this->q_data.get_head_ptr();
     }
 

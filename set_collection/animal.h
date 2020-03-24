@@ -6,25 +6,25 @@
     #include "string"
 
     class Animal{
-    private:
-        std::string a_name;
-        int a_height;
-        std::string a_type;
-    public:
-        Animal();
-        Animal(const Animal&);
-        ~Animal();
-        std::string get_name();
-        int get_height() const;
-        std::string get_type();
-        void set_name(std::string);
-        void set_height(int);
-        void set_type(std::string);
-        bool operator > (const Animal&) const;
-        bool operator >= (const Animal&) const;
-        bool operator <= (const Animal&) const;
-        bool operator < (const Animal&) const;
-        friend std::ostream& operator<< (std::ostream &, const Animal &);
+        private:
+            std::string a_name;
+            int a_height;
+            std::string a_type;
+        public:
+            Animal();
+            Animal(const Animal&);
+            ~Animal();
+            std::string get_name();
+            int get_height() const;
+            std::string get_type();
+            void set_name(std::string);
+            void set_height(int);
+            void set_type(std::string);
+            bool operator > (const Animal&) const;
+            bool operator >= (const Animal&) const;
+            bool operator <= (const Animal&) const;
+            bool operator < (const Animal&) const;
+            friend std::ostream& operator<< (std::ostream &, const Animal &);
     };
 
     Animal::Animal() {

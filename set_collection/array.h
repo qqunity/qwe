@@ -6,54 +6,56 @@
 
     template <typename T>
     class Array{
-    private:
-        ArrayElement<T> *data;
-        int count;
-    public:
-        Array();
-        Array(const Array<T>&);
-        ~Array();
-        void append(T);
-        void prepend(T);
-        void pop(int);
-        void del();
-        void swap(int, int);
-        Array<T> reversed();
-        T get_element(int);
-        ArrayElement<T> *get_element_ptr(int);
-        int get_index(T);
-        T get_first();
-        T get_last();
-        void insert(int, T);
-        void set_element(int, T);
-        void print_array();
-//        void sorted(const std::string&);
-        Array<T> &operator = (const Array<T>&);
-        Array<T> operator + (const Array<T>&);
-        bool operator == (const Array<T>&);
-        bool operator != (const Array<T>&);
-        T operator [] (int);
-        Array<T> operator * (int);
-        int length();
-        class ArrIterator {
         private:
-            ArrayElement<T> *cur_o;
+            ArrayElement<T> *data;
+            int count;
         public:
-            ArrIterator(ArrayElement<T> *);
-            ArrayElement<T> &operator + (int );
-            ArrayElement<T> &operator - (int );
-            ArrayElement<T> &operator ++ (int);
-            ArrayElement<T> &operator -- (int);
-            ArrayElement<T> &operator ++ ();
-            ArrayElement<T> &operator -- ();
-            ArrayElement<T> &operator = (ArrayElement<T>&);
-            bool operator != (const ArrIterator&);
-            bool operator == (const ArrIterator&);
-            ArrayElement<T> &operator * ();
-        };
-        ArrIterator begin();
-        ArrIterator end();
-        template<typename T1> friend std::ostream& operator<< (std::ostream &, const Array<T1> &);
+            Array();
+            Array(int);
+            Array(const Array<T> &);
+            ~Array();
+            void append(T);
+            void prepend(T);
+            void pop(int);
+            void del();
+            void swap(int, int);
+            Array<T> reversed();
+            T get_element(int);
+            ArrayElement<T> *get_element_ptr(int);
+            int get_index(T);
+            void resize(int);
+            T get_first();
+            T get_last();
+            void insert(int, T);
+            void set_element(int, T);
+            void print_array();
+    //        void sorted(const std::string&);
+            Array<T> &operator = (const Array<T> &);
+            Array<T> operator + (const Array<T> &);
+            bool operator == (const Array<T> &);
+            bool operator != (const Array<T> &);
+            T operator [] (int);
+            Array<T> operator * (int);
+            int length();
+            class ArrIterator {
+            private:
+                ArrayElement<T> *cur_o;
+            public:
+                ArrIterator(ArrayElement<T> *);
+                ArrayElement<T> &operator + (int );
+                ArrayElement<T> &operator - (int );
+                ArrayElement<T> &operator ++ (int);
+                ArrayElement<T> &operator -- (int);
+                ArrayElement<T> &operator ++ ();
+                ArrayElement<T> &operator -- ();
+                ArrayElement<T> &operator = (ArrayElement<T> &);
+                bool operator != (const ArrIterator &);
+                bool operator == (const ArrIterator &);
+                ArrayElement<T> &operator * ();
+            };
+            ArrIterator begin();
+            ArrIterator end();
+            template<typename T1> friend std::ostream& operator<< (std::ostream &, const Array<T1> &);
     };
 
     template<typename T>
@@ -124,7 +126,7 @@
         this->data = new ArrayElement<T>[n];
         this->count = 0;
         for (int i = 0; i < n; ++i){
-            this->data[i].set_value((Arr.data[i]).get_value());
+            this->data[i].set_value((Arr.data[i]).get_data());
             ++this->count;
         }
     }
@@ -152,7 +154,7 @@
 
     template<typename T>
     T Array<T>::get_element(int index) {
-        return this->data[index].get_value();
+        return this->data[index].get_data();
     }
 
     template<typename T>
@@ -161,9 +163,9 @@
             std::cout << "[";
             for (int i = 0; i < this->count; ++i) {
                 if (i == this->count - 1) {
-                    std::cout << this->data[i].get_value();
+                    std::cout << this->data[i].get_data();
                 } else {
-                    std::cout << this->data[i].get_value() << ", ";
+                    std::cout << this->data[i].get_data() << ", ";
                 }
             }
             std::cout << "]" << std::endl;
@@ -199,7 +201,7 @@
         Array<T> buff;
         for (int i = 0; i < count; ++i){
             if (i != index) {
-                buff.append(data[i].get_value());
+                buff.append(data[i].get_data());
             }
         }
         delete [] this->data;
@@ -217,15 +219,13 @@
         }
     }
 
-template<typename T>
-    Array<T>::~Array() {
-        del();
-    }
+    template<typename T>
+    Array<T>::~Array() = default;
 
     template<typename T>
     void Array<T>::swap(int index1, int index2) {
-        T buff_t = this->data[index1].get_value();
-        this->data[index1].set_value(data[index2].get_value());
+        T buff_t = this->data[index1].get_data();
+        this->data[index1].set_value(data[index2].get_data());
         this->data[index2].set_value(buff_t);
     }
 
@@ -233,7 +233,7 @@ template<typename T>
     Array<T> Array<T>::reversed() {
         Array<T> buff;
         for (int i = count - 1; i >=0; --i){
-            buff.append(data[i].get_value());
+            buff.append(data[i].get_data());
         }
         return buff;
     }
@@ -247,7 +247,7 @@ template<typename T>
         this->count = Arr.count;
         this->data = new ArrayElement<T>[count];
         for(int i = 0; i < count; ++i){
-            this->data[i].set_value(Arr.data[i].get_value());
+            this->data[i].set_value(Arr.data[i].get_data());
         }
         return *this;
     }
@@ -259,12 +259,12 @@ template<typename T>
 
     template<typename T>
     T Array<T>::get_first() {
-        return this->data[0].get_value();
+        return this->data[0].get_data();
     }
 
     template<typename T>
     T Array<T>::get_last() {
-        return this->data[count - 1].get_value();
+        return this->data[count - 1].get_data();
     }
 
     template<typename T>
@@ -277,20 +277,20 @@ template<typename T>
         auto buff = new ArrayElement<int>[count + 1];
         for (int i = 0; i < count + 1; ++i){
             if (i < index){
-                buff[i].set_value(data[i].get_value());
+                buff[i].set_value(data[i].get_data());
             }
             else if (i == index){
                 buff[i].set_value(value);
             }
             else {
-                buff[i].set_value(data[i - 1].get_value());
+                buff[i].set_value(data[i - 1].get_data());
             }
         }
         delete [] this->data;
         ++this->count;
         this->data = new ArrayElement<T>[count];
         for (int i = 0; i < count; ++i){
-            this->data[i].set_value(buff[i].get_value());
+            this->data[i].set_value(buff[i].get_data());
         }
     }
 
@@ -298,7 +298,7 @@ template<typename T>
     Array<T> Array<T>::operator+(const Array<T> &Arr) {
         Array<T> buff (*this);
         for (int i = 0; i < Arr.count; ++i){
-            buff.append(Arr.data[i].get_value());
+            buff.append(Arr.data[i].get_data());
         }
         return buff;
     }
@@ -309,7 +309,7 @@ template<typename T>
             return false;
         }
         for (int i = 0; i < this->count; ++i){
-            if (this->data[i].get_value() != Arr.data[i].get_value()){
+            if (this->data[i].get_data() != Arr.data[i].get_data()){
                 return false;
             }
         }
@@ -331,7 +331,7 @@ template<typename T>
             Array<T> buff;
             for (int j = 0; j < k; ++j){
                 for (int i = 0; i < this->count; ++i){
-                    buff.append(this->data[i].get_value());
+                    buff.append(this->data[i].get_data());
                 }
             }
             return buff;
@@ -341,7 +341,7 @@ template<typename T>
     template<typename T>
     int Array<T>::get_index(T val) {
         for (int i = 0; i < count; ++i){
-            if (this->data[i].get_value() == val){
+            if (this->data[i].get_data() == val){
                 return i;
             }
         }
@@ -350,7 +350,7 @@ template<typename T>
 
     template<typename T>
     T Array<T>::operator[](int index) {
-        return this->data[index].get_value();
+        return this->data[index].get_data();
     }
 
     template<typename T>
@@ -360,7 +360,7 @@ template<typename T>
 
     template<typename T>
     typename Array<T>::ArrIterator Array<T>::end() {
-        return this->data + count;
+        return this->data + this->count;
     }
 
     template<typename T1>
@@ -369,9 +369,9 @@ template<typename T>
             out << "[";
             for (int i = 0; i < Arr.count; ++i) {
                 if (i == Arr.count - 1) {
-                    out << Arr.data[i].get_value();
+                    out << Arr.data[i].get_data();
                 } else {
-                    out << Arr.data[i].get_value() << ", ";
+                    out << Arr.data[i].get_data() << ", ";
                 }
             }
             out << "]";
@@ -385,6 +385,37 @@ template<typename T>
     template<typename T>
     ArrayElement<T> *Array<T>::get_element_ptr(int index) {
         return &this->data[index];
+    }
+
+    template<typename T>
+    Array<T>::Array(int n) {
+        this->count = n;
+        this->data = new ArrayElement<T>[n];
+    }
+
+    template<typename T>
+    void Array<T>::resize(int n) {
+        if (this->count == 0){
+            this->count = n;
+            this->data = new ArrayElement<T>[n];
+        }
+        else {
+            auto buff = new ArrayElement<T>[this->count];
+            for (int i = 0; i < this->count; ++i){
+                buff[i].set_value(this->data[i].get_data());
+            }
+            if (n < this->count){
+                std::cout << "Invalid resize...";
+            }
+            else {
+                delete [] data;
+                this->data = new ArrayElement<T>[n];
+                for (int i = 0; i < this->count; ++i){
+                    this->data[i].set_value(buff[i].get_data());
+                }
+                this->count = n;
+            }
+        }
     }
 
 

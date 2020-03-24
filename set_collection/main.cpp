@@ -1,8 +1,10 @@
 #include "animal.h"
+#include "stream.h"
 #include <vector>
 #include <algorithm>
 
-int main() {
+
+void test_lambda(){
     Animal a;
     a.set_name("Gosha");
     a.set_height(104);
@@ -37,5 +39,24 @@ int main() {
     std::for_each(vec.begin(), vec.end(), [] (const Animal& A) {
         std::cout << A << " ";
     });
-    return 0;
+}
+
+int main() {
+    int mas[] = {0, 1, 2, 3, 4, 5, 6, 7};
+    MutableSequence<int, ListSequence<int>> s(mas, 8);
+    std::cout << s << std::endl;
+    int init = 9;
+    map(s.begin(), s.end(), [&init](ListElement<int> &val){
+       val.set_data(init);
+       ++init;
+    });
+    std::cout << s << std::endl;
+    auto ms = where<MutableSequence<int, ListSequence<int>>>(s.begin(), s.end(), [](ListElement<int> &val){
+        return val.get_data() < 13;
+    });
+    std::cout << ms << std::endl;
+    int sum_all = reduce<int>(s.begin(), s.end(), 0, [](int x1, int x2){
+        return x1 > x2 ? x1 : x2;
+    });
+    std::cout << sum_all << std::endl;
 }

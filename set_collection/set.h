@@ -6,13 +6,13 @@
 
     template <typename T>
     class Set: public List<T>::List {
-    private:
-        List<T> content;
-    public:
-        Set();
-        ~Set();
-        Set(const Set&);
-        void append(T);
+        private:
+            List<T> content;
+        public:
+            Set();
+            ~Set();
+            Set(const Set&);
+            void append(T);
 
     };
 

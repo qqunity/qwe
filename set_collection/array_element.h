@@ -5,15 +5,15 @@
 
     template <typename T>
     class ArrayElement{
-    private:
-        T val;
-        bool has_val;
-    public:
-        ArrayElement();
-        bool has_value();
-        void set_value(T);
-        T get_value();
-        ~ArrayElement();
+        private:
+            T val;
+            bool has_val;
+        public:
+            ArrayElement();
+            bool has_value();
+            void set_value(T);
+            T get_data();
+            ~ArrayElement();
     };
 
     template<typename T>
@@ -28,7 +28,7 @@
     }
 
     template<typename T>
-    T ArrayElement<T>::get_value() {
+    T ArrayElement<T>::get_data() {
         if (has_val){
             return val;
         }

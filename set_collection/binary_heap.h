@@ -6,16 +6,16 @@
 
     template <typename T>
     class BinaryHeap{
-    private:
-        Array<T> data;
-        int size;
-    public:
-        explicit BinaryHeap(Array<T>);
-        void print_b_heap();
-        void sift_down(int);
-        void sift_up(int);
-        void heapify();
-        T extract_min();
+        private:
+            Array<T> data;
+            int size;
+        public:
+            explicit BinaryHeap(Array<T>);
+            void print_b_heap();
+            void sift_down(int);
+            void sift_up(int);
+            void heapify();
+            T extract_min();
     };
 
     template<typename T>
