@@ -5,7 +5,7 @@
     #include "sequence.h"
 
     template<typename  T>
-    class ArraySequence : Sequence<T>{
+    class ArraySequence : public Sequence<T>{
         private:
             Array<T> sequence_data;
             int sequence_size;

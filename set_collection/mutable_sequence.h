@@ -252,28 +252,77 @@ template<typename T, class C>
         return buff;
     }
 
-    template<typename T>
-    int min_sequence_len(size_t number, ...){
+    template<typename T1, typename T2, typename list_T>
+    list_T combine_these_structures(ListSequence<int> &meta_data, ...){
+        list_T data;
         va_list argList;
-        va_start(argList, number);
-        int min_len = va_arg(argList, T).length();
-        for(size_t i = 1; i < number; ++i) {
-            min_len = std::min(min_len, va_arg(argList, T).length());
+        va_start(argList, meta_data);
+        int number1 = meta_data[0];
+        int number2 = meta_data[1];
+        for(int i = 0; i < number1; ++i) {
+            data.append(&va_arg(argList, T1));
+            meta_data.append(0);
         }
+        for(int i = 0; i < number2; ++i) {
+            data.append(&va_arg(argList, T2));
+            meta_data.append(1);
+        }
+        meta_data.pop(0);
+        meta_data.pop(0);
         va_end(argList);
-        return min_len;
+        return data;
     }
 
-//    template<typename T>
-//    T zip(size_t number, int min_len, ...){
-//        va_list sqs;
-//        va_start(sqs, n);
-//        va_list argList;
-//        va_start(argList, number);
-//        for(size_t i = 1; i < number; ++i) {
-//            min_len = std::min(min_len, va_arg(argList, T).length());
-//        }
-//        va_end(argList);
-//    }
+    template<typename list_T, typename T>
+    int min_sequence_len(ListSequence<int> meta_data, list_T data){
+        int mn_len = INT32_MAX;
+        for (int i = 0; i < data.length(); ++i){
+            if (meta_data[i] == 0){
+                auto data_el = *dynamic_cast<ListSequence<T> *>(data[i]);
+                mn_len = std::min(mn_len, data_el.length());
+            }
+            else if (meta_data[i] == 1) {
+                auto data_el = *dynamic_cast<ArraySequence<T> *>(data[i]);
+                mn_len = std::min(mn_len, data_el.length());
+            }
+        }
+        return mn_len;
+    }
+
+    template<typename seq_T, typename list_T, typename T>
+    seq_T zip(ListSequence<int> meta_data, list_T data){
+        seq_T zip_seq;
+        int cnt_el = min_sequence_len<list_T, T>(meta_data, data);
+        for (int i = 0; i < cnt_el; ++i){
+            ListSequence<T> buff;
+            for (int j = 0; j < data.length(); ++j){
+                if (meta_data[j] == 0){
+                    auto data_el = *dynamic_cast<ListSequence<T> *>(data[j]);
+                    buff.append(data_el[i]);
+                }
+                else if (meta_data[j] == 1) {
+                    auto data_el = *dynamic_cast<ArraySequence<T> *>(data[j]);
+                    buff.append(data_el[i]);
+                }
+            }
+            zip_seq.append(buff);
+        }
+        return zip_seq;
+    }
+
+    template<typename T>
+    ListSequence<ListSequence<T>> unzip(ListSequence<ListSequence<T>> data){
+        int cnt_list = data[0].length();
+        ListSequence<ListSequence<T>> unzip_seq;
+        for (int i = 0; i < cnt_list; ++i){
+            ListSequence<T> buff;
+            for (int j = 0; j < data.length(); ++j){
+                buff.append(data[j][i]);
+            }
+            unzip_seq.append(buff);
+        }
+        std::cout << unzip_seq;
+        return unzip_seq;
+    }
 
 #endif

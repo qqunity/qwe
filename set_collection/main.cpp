@@ -4,45 +4,45 @@
 #include <algorithm>
 #include "sequence.h"
 
-    class Car {
-        private:
-            std::string name;
-        public:
-            Car();
-            ~Car() = default;
-            Car(std::string);
-            std::string get_name();
-            virtual void say_hello() = 0;
-    };
-
-    Car::Car() {
-        this->name = "default";
-    }
-
-    std::string Car::get_name() {
-        return this->name;
-    }
-
-    Car::Car(std::string name) {
-        this->name = name;
-    }
-
-    class BMW : public Car {
-        private:
-            std::string model;
-        public:
-            BMW();
-            ~BMW() = default;
-            void say_hello() override;
-    };
-
-    BMW::BMW() {
-        this->model = "E12";
-    }
-
-    void BMW::say_hello() {
-        std::cout << "Hello!";
-    }
+//    class Car {
+//        private:
+//            std::string name;
+//        public:
+//            Car();
+//            ~Car() = default;
+//            Car(std::string);
+//            std::string get_name();
+//            virtual void say_hello() = 0;
+//    };
+//
+//    Car::Car() {
+//        this->name = "default";
+//    }
+//
+//    std::string Car::get_name() {
+//        return this->name;
+//    }
+//
+//    Car::Car(std::string name) {
+//        this->name = name;
+//    }
+//
+//    class BMW : public Car {
+//        private:
+//            std::string model;
+//        public:
+//            BMW();
+//            ~BMW() = default;
+//            void say_hello() override;
+//    };
+//
+//    BMW::BMW() {
+//        this->model = "E12";
+//    }
+//
+//    void BMW::say_hello() {
+//        std::cout << "Hello!";
+//    }
 
 
 class Student {
@@ -133,7 +133,7 @@ void test_lambda(){
     });
 }
 
-void test_lab2(){
+void test_map_reduce(){
     int mas[] = {0, 1, 2, 3, 4, 5, 6, 7};
     MutableSequence<int, ListSequence<int>> s(mas, 8);
     int mas2[] = {0, 1, 2, 3, 4};
@@ -153,7 +153,7 @@ void test_lab2(){
         return x1 > x2 ? x1 : x2;
     });
     std::cout << max_all << std::endl;
-    std::cout << min_sequence_len<MutableSequence<int, ListSequence<int>>>(2, s, s2);
+//    std::cout << min_sequence_len<MutableSequence<int, ListSequence<int>>>(2, s, s2);
 }
 
 void test_student(){
@@ -169,15 +169,35 @@ void test_student(){
     std::cout << n_ms;
 }
 
-int main(){
-    test_student();
-//    ArraySequence<int> l;
-//    for (int i = 0; i < 7; ++i){
-//        l.append(i);
-//    }
-//    std::cout << l;
-//    std::vector<Sequence<int> *> a;
-//    a.push_back(&l);
-//    std::cout << *dynamic_cast<ArraySequence<int> *>(a[0]);
-    return 0;
+void test_zip_unzip() {
+    ListSequence<int> l;
+    ArraySequence<int> a;
+    for (int i = 0; i < 7; ++i){
+        l.append(i);
+        a.append(i + 3);
+    }
+    a.append(5);
+    a.append(5);
+    l.append(4);
+    ListSequence<int> m_data;
+    m_data.append(1);
+    m_data.append(1);
+    auto data = combine_these_structures<ListSequence<int>, ArraySequence<int>, ListSequence<Sequence<int> *>>(m_data, &l, &a);
+    for (int i = 0; i < 2; ++i) {
+        if (m_data[i] == 0) {
+            auto data_el = *dynamic_cast<ListSequence<int> *>(data[i]);
+            std::cout << data_el << std::endl;
+        }
+        else if (m_data[i] == 1) {
+            auto data_el = *dynamic_cast<ArraySequence<int> *>(data[i]);
+            std::cout << data_el << std::endl;
+        }
+    }
+    auto zip_data = zip<ListSequence<ListSequence<int>>, ListSequence<Sequence<int> *>, int>(m_data, data);
+    std::cout << zip_data << std::endl;
+    ListSequence<ListSequence<int>> unzip_data = unzip<int>(zip_data);
+}
+int main() {
+   Stream<int, Sequence<int>> s;
+   return 0;
 }
