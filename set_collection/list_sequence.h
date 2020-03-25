@@ -2,9 +2,10 @@
 #define SET_COLLECTION_LIST_SEQUENCE_H
 
     #include "list.h"
+    #include "sequence.h"
 
     template<typename  T>
-    class ListSequence{
+    class ListSequence : public Sequence<T>{
     private:
         List<T> sequence_data;
         int sequence_size;
@@ -14,25 +15,25 @@
         ListSequence(const List<T> &);
         ListSequence(ListSequence<T> &);
         ~ListSequence();
-        void append(T);
-        void prepend(T);
-        int length();
-        void pop(int);
-        void del();
-        void swap(int, int);
+        void append(T) override;
+        void prepend(T) override;
+        int length() override;
+        void pop(int) override;
+        void del() override;
+        void swap(int, int) override;
         ListSequence<T> reversed();
-        T get_element(int);
-        int get_index(T);
-        ListElement<T> *get_element_ptr(int);
-        T get_first();
-        T get_last();
-        void insert(int, T);
-        void set_element(int, T);
+        T get_element(int)  override;
+        int get_index(T)  override;
+        ListElement<T> *get_element_ptr(int) ;
+        T get_first()  override;
+        T get_last()  override;
+        void insert(int, T)  override;
+        void set_element(int, T)  override;
         ListSequence<T> &operator = (const ListSequence<T> &);
         ListSequence<T> operator + (ListSequence<T> &);
         bool operator == (ListSequence<T> &);
         bool operator != (ListSequence<T> &);
-        T operator [] (int);
+        T operator [] (int) override;
         ListSequence<T> operator * (int);
         class ListSequenceIterator {
         private:

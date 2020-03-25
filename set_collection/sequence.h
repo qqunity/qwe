@@ -3,8 +3,6 @@
 
     template<typename T>
     class Sequence{
-    private:
-        int sequence_size;
     public:
         Sequence() = default;
         ~Sequence() = default;

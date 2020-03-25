@@ -274,7 +274,7 @@
 
     template<typename T>
     void Array<T>::insert(int index, T value) {
-        auto buff = new ArrayElement<int>[count + 1];
+        auto buff = new ArrayElement<T>[count + 1];
         for (int i = 0; i < count + 1; ++i){
             if (i < index){
                 buff[i].set_value(data[i].get_data());

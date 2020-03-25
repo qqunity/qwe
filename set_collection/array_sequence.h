@@ -2,9 +2,10 @@
 #define SET_COLLECTION_ARRAY_SEQUENCE_H
 
     #include "array.h"
+    #include "sequence.h"
 
     template<typename  T>
-    class ArraySequence{
+    class ArraySequence : Sequence<T>{
         private:
             Array<T> sequence_data;
             int sequence_size;
@@ -14,25 +15,25 @@
             ArraySequence(const Array<T> &);
             ArraySequence(ArraySequence<T> &);
             ~ArraySequence();
-            void append(T);
-            void prepend(T);
-            int length();
-            void pop(int);
-            void del();
-            void swap(int, int);
+            void append(T) override;
+            void prepend(T) override;
+            int length() override;
+            void pop(int) override;
+            void del() override;
+            void swap(int, int) override;
             ArraySequence<T> reversed();
-            T get_element(int);
-            int get_index(T);
+            T get_element(int) override;
+            int get_index(T) override;
             ArrayElement<T> *get_element_ptr(int);
-            T get_first();
-            T get_last();
-            void insert(int, T);
-            void set_element(int, T);
+            T get_first() override;
+            T get_last() override;
+            void insert(int, T) override;
+            void set_element(int, T) override;
             ArraySequence<T> &operator = (const ArraySequence<T> &);
             ArraySequence<T> operator + (ArraySequence<T> &);
             bool operator == (ArraySequence<T> &);
             bool operator != (ArraySequence<T> &);
-            T operator [] (int);
+            T operator [] (int) override;
             ArraySequence<T> operator * (int);
         class ArrSequenceIterator {
         private:
