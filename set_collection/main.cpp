@@ -3,6 +3,51 @@
 #include <vector>
 #include <algorithm>
 
+class Student {
+    private:
+        std::string name;
+        int group_id;
+    public:
+        Student();
+        Student(std::string, int);
+        std::string get_name();
+        int get_group_id();
+        void set_name(std::string s_name);
+        void set_group_id(int);
+        friend std::ostream& operator<< (std::ostream &, const Student &);
+};
+
+    Student::Student(std::string s_name, int s_group_id) {
+        this->name = s_name;
+        this->group_id = s_group_id;
+    }
+
+    std::string Student::get_name() {
+        return this->name;
+    }
+
+    int Student::get_group_id() {
+        return this->group_id;
+    }
+
+    void Student::set_name(std::string s_name) {
+        this->name = s_name;
+    }
+
+    void Student::set_group_id(int s_gruop_id) {
+        this->group_id = s_gruop_id;
+    }
+
+    std::ostream &operator<<(std::ostream &out, const Student &S) {
+        out << "<" << S.name << ", " << S.group_id << ">";
+        return out;
+    }
+
+    Student::Student() {
+        this->name = "null";
+        this->group_id = -1;
+    }
+
 
 void test_lambda(){
     Animal a;
@@ -41,22 +86,43 @@ void test_lambda(){
     });
 }
 
-int main() {
+void test_lab2(){
     int mas[] = {0, 1, 2, 3, 4, 5, 6, 7};
     MutableSequence<int, ListSequence<int>> s(mas, 8);
+    int mas2[] = {0, 1, 2, 3, 4};
+    MutableSequence<int, ListSequence<int>> s2(mas2, 5);
     std::cout << s << std::endl;
     int init = 9;
     map(s.begin(), s.end(), [&init](ListElement<int> &val){
-       val.set_data(init);
-       ++init;
+        val.set_data(init);
+        ++init;
     });
     std::cout << s << std::endl;
     auto ms = where<MutableSequence<int, ListSequence<int>>>(s.begin(), s.end(), [](ListElement<int> &val){
         return val.get_data() < 13;
     });
     std::cout << ms << std::endl;
-    int sum_all = reduce<int>(s.begin(), s.end(), 0, [](int x1, int x2){
+    int max_all = reduce<int>(s.begin(), s.end(), 0, [](int x1, int x2){
         return x1 > x2 ? x1 : x2;
     });
-    std::cout << sum_all << std::endl;
+    std::cout << max_all << std::endl;
+    std::cout << min_sequence_len<MutableSequence<int, ListSequence<int>>>(2, s, s2);
+}
+
+void test_student(){
+    MutableSequence<Student, ArraySequence<Student>> ms;
+    for (int i = 0; i < 3; ++i){
+        Student st(Student("Vasya", i + 514));
+        ms.append(st);
+    }
+    std::cout << ms << std::endl;
+    auto n_ms = where<MutableSequence<Student, ArraySequence<Student>>>(ms.begin(), ms.end(), [](ArrayElement<Student> &ArrS){
+        return ArrS.get_data().get_group_id() != 514;
+    });
+    std::cout << n_ms;
+}
+
+int main() {
+    test_student();
+    return 0;
 }

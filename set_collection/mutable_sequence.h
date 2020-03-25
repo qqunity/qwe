@@ -3,6 +3,8 @@
 
     #include "array_sequence.h"
     #include "list_sequence.h"
+    #include <cstdarg>
+    #include <algorithm>
 
     template<typename T, class C>
     class MutableSequence{
@@ -218,5 +220,60 @@ MutableSequence<T, C> MutableSequence<T, C>::operator*(int k) {
 
 template<typename T, class C>
     MutableSequence<T, C>::~MutableSequence() = default;
+
+    template<typename InputIterator, typename Function>
+    void map(InputIterator first_it, InputIterator last_it, Function f){
+        while (first_it != last_it){
+            f(*first_it);
+            ++first_it;
+        }
+    }
+
+    template<typename T, typename InputIterator, typename Function>
+    T where(InputIterator first_it, InputIterator last_it, Function f){
+        T buff;
+        while (first_it != last_it){
+            if (f(*first_it)){
+                buff.append((*first_it).get_data());
+            }
+            ++first_it;
+        }
+        return buff;
+    }
+
+    template<typename T, typename InputIterator, typename Function>
+    T reduce(InputIterator first_it, InputIterator last_it, T c, Function f){
+        T buff = f((*first_it).get_data(), c);
+        ++first_it;
+        while (first_it != last_it){
+            buff = f((*first_it).get_data(), buff);
+            ++first_it;
+        }
+        return buff;
+    }
+
+    template<typename T>
+    int min_sequence_len(size_t number, ...){
+        va_list argList;
+        va_start(argList, number);
+        int min_len = va_arg(argList, T).length();
+        for(size_t i = 1; i < number; ++i) {
+            min_len = std::min(min_len, va_arg(argList, T).length());
+        }
+        va_end(argList);
+        return min_len;
+    }
+
+//    template<typename T>
+//    T zip(size_t number, int min_len, ...){
+//        va_list sqs;
+//        va_start(sqs, n);
+//        va_list argList;
+//        va_start(argList, number);
+//        for(size_t i = 1; i < number; ++i) {
+//            min_len = std::min(min_len, va_arg(argList, T).length());
+//        }
+//        va_end(argList);
+//    }
 
 #endif

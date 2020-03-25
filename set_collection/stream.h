@@ -353,37 +353,4 @@ Stream<T, C> Stream<T, C>::reversed() {
     template<typename T, class C>
     Stream<T, C>::~Stream() = default;
 
-
-    template<typename InputIterator, typename Function>
-    void map(InputIterator first_it, InputIterator last_it, Function f){
-        while (first_it != last_it){
-            f(*first_it);
-            ++first_it;
-        }
-    }
-
-    template<typename T, typename InputIterator, typename Function>
-    T where(InputIterator first_it, InputIterator last_it, Function f){
-        T buff;
-        while (first_it != last_it){
-            if (f(*first_it)){
-                buff.append((*first_it).get_data());
-            }
-            ++first_it;
-        }
-        return buff;
-    }
-
-    template<typename T, typename InputIterator, typename Function>
-    T reduce(InputIterator first_it, InputIterator last_it, T c, Function f){
-        T buff = f((*first_it).get_data(), c);
-        ++first_it;
-        while (first_it != last_it){
-            buff = f((*first_it).get_data(), buff);
-            ++first_it;
-        }
-        return buff;
-    }
-
-    
 #endif
