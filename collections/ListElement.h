@@ -11,19 +11,33 @@
         bool hasValue;
     public:
         ListElement();
+
         ListElement(T);
+
         ListElement(const ListElement<T> &);
+
         void setValue(T);
+
         void setNextPtr(ListElement<T> *);
+
         void setPrevPtr(ListElement<T> *);
+
         T getValue();
+
         ListElement<T> *getNextPtr();
+
         ListElement<T> *getPrevPtr();
+
         bool checkValue();
+
         ListElement<T> &operator = (const ListElement<T> &);
+
         ListElement<T> &operator = (T);
+
         operator T();
+
         template<typename T1> friend std::ostream& operator<< (std::ostream &, const ListElement<T1> &);
+
         ~ListElement();
     };
 

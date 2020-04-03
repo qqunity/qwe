@@ -10,15 +10,25 @@
             bool hasValue;
         public:
             ArrayElement();
+
             ArrayElement(T);
+
             ArrayElement(const ArrayElement<T> &);
+
             void setValue(T);
+
             T getValue();
+
             bool checkValue();
+
             ArrayElement<T> &operator = (const ArrayElement<T> &);
+
             ArrayElement<T> &operator = (T);
+
             operator T();
+
             template<typename T1> friend std::ostream& operator<< (std::ostream &, const ArrayElement<T1> &);
+
             ~ArrayElement();
     };
 

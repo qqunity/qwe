@@ -31,7 +31,9 @@
                 std::string errorMessage;
             public:
                 ArrayException(std::string);
+
                 const char *what() const noexcept override;
+
                 ~ArrayException();
         };
 
@@ -69,12 +71,14 @@
         ListElementException::~ListElementException() = default;
 
         class ListException: public std::exception {
-        private:
-            std::string errorMessage;
-        public:
-            ListException(std::string);
-            const char *what() const noexcept override;
-            ~ListException();
+            private:
+                std::string errorMessage;
+            public:
+                ListException(std::string);
+
+                const char *what() const noexcept override;
+
+                ~ListException();
         };
 
         ListException::ListException(std::string error) {
@@ -86,6 +90,29 @@
         }
 
         ListException::~ListException() = default;
+    }
+
+    namespace streamException {
+        class StreamException: public std::exception {
+        private:
+            std::string errorMessage;
+        public:
+            StreamException(std::string);
+
+            const char *what() const noexcept override;
+
+            ~StreamException();
+        };
+
+        StreamException::StreamException(std::string error) {
+            this->errorMessage = std::move(error);
+        }
+
+        const char *StreamException::what() const noexcept {
+            return this->errorMessage.c_str();
+        }
+
+        StreamException::~StreamException() = default;
     }
 
 #endif
