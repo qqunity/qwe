@@ -1,8 +1,7 @@
 #ifndef SET_COLLECTION_ANIMAL_H
 #define SET_COLLECTION_ANIMAL_H
     #include <utility>
-
-#include "list.h"
+    #include "list.h"
     #include "string"
 
     class Animal{

@@ -4,10 +4,10 @@
     #include <string>
     #include <ctime>
 
-    template<typename T, typename C>
+    template<typename T, class C>
     class Stream{
         private:
-            C stream_data;
+            MutableSequence<T, C> stream_data;
             int stream_size;
             bool ability_to_write;
             bool ability_to_read;
@@ -19,7 +19,7 @@
             Stream(bool = true, bool = true, bool = true, bool = false, int = -1);
             Stream(Stream<T, C> &);
             Stream(T *, int);
-            Stream(C &);
+            Stream(MutableSequence<T, C> &);
             bool can_read();
             bool can_seek();
             bool can_write();
@@ -47,10 +47,10 @@
             auto begin();
             auto end();
             ~Stream();
-            template<typename T1, typename C1> friend std::ostream& operator<< (std::ostream &, Stream<T1, C1> &);
+            template<typename T1, class C1> friend std::ostream& operator<< (std::ostream &, Stream<T1, C1> &);
     };
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C>::Stream(bool ability_to_write, bool ability_to_read, bool ability_to_seek, bool ability_to_timeout, int timeout) {
         this->ability_to_write = ability_to_write;
         this->ability_to_read = ability_to_read;
@@ -61,25 +61,25 @@
         this->stream_size = this->stream_data.length();
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     bool Stream<T, C>::can_write() {
         this->check_timeout();
         return this->ability_to_write;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     bool Stream<T, C>::can_read() {
         this->check_timeout();
         return this->ability_to_read;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     bool Stream<T, C>::can_seek() {
         this->check_timeout();
         return this->ability_to_seek;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::check_timeout(bool show_the_remaining_time) {
         if (this->ability_to_timeout && (time(NULL) - this->creation_time >= this->timeout)){
             std::cout << "Stream::TimeoutError";
@@ -92,13 +92,13 @@
         }
     }
 
-    template<typename T, typename C>
-    bool Stream<T, C>::can_timeout() {
-        this->check_timeout();
-        return this->ability_to_timeout;
-    }
+template<typename T, class C>
+bool Stream<T, C>::can_timeout() {
+    this->check_timeout();
+    return this->ability_to_timeout;
+}
 
-    template<typename T, typename C>
+    template<typename T, class C>
     int Stream<T, C>::length(std::string params) {
         this->check_timeout();
         if (params == "bytes"){
@@ -115,7 +115,7 @@
         return 0;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C> Stream<T, C>::operator<<(T val) {
         if (this->ability_to_write) {
             this->check_timeout();
@@ -128,7 +128,7 @@
         }
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C>::Stream(Stream<T, C> &S) {
         this->stream_size = S.stream_size;
         this->stream_data = S.stream_data;
@@ -140,7 +140,7 @@
         this->ability_to_read = S.ability_to_read;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::push(T val) {
         if (this->ability_to_write) {
             this->check_timeout();
@@ -152,7 +152,7 @@
         }
     }
 
-    template<typename T1, typename C1>
+    template<typename T1, class C1>
     std::ostream &operator<<(std::ostream &out, Stream<T1, C1> &S) {
         S.check_timeout();
         if (!S.empty()) {
@@ -170,7 +170,7 @@
         return out;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::pop() {
         if (this->ability_to_write) {
             this->check_timeout();
@@ -182,7 +182,7 @@
         }
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     auto *Stream<T, C>::front() {
         if (this->ability_to_seek) {
             this->check_timeout();
@@ -193,7 +193,7 @@
         }
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     auto *Stream<T, C>::back() {
         if (this->ability_to_seek) {
             this->check_timeout();
@@ -204,7 +204,7 @@
         }
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     T Stream<T, C>::operator>>(T &buff) {
         if (this->ability_to_read) {
             this->check_timeout();
@@ -217,43 +217,43 @@
         }
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::set_ability_to_write(bool val) {
         this->check_timeout();
         this->set_ability_to_write = val;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::set_ability_to_read(bool val) {
         this->check_timeout();
         this->set_ability_to_read = val;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::set_ability_to_seek(bool val) {
         this->check_timeout();
         this->set_ability_to_seek = val;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::set_ability_to_timeout(bool val) {
         this->check_timeout();
         this->ability_to_timeout = val;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::set_timeout(int val) {
         this->check_timeout();
         this->timeout = val;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     bool Stream<T, C>::empty() {
         this->check_timeout();
         return this->stream_size == 0;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C>::Stream(T *mas, int n) {
         this->ability_to_write = true;
         this->ability_to_read = true;
@@ -266,8 +266,8 @@
         this->stream_size = this->stream_data.length();
     }
 
-    template<typename T, typename C>
-    Stream<T, C>::Stream(C &MS) {
+    template<typename T, class C>
+    Stream<T, C>::Stream(MutableSequence<T, C> &MS) {
         this->ability_to_write = true;
         this->ability_to_read = true;
         this->ability_to_seek = true;
@@ -279,13 +279,13 @@
         this->stream_size = this->stream_data.length();
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::dispose() {
         this->stream_data.del();
         this->stream_size = this->stream_data.length();
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     void Stream<T, C>::swap(int index1, int index2) {
         if (this->ability_to_write){
             this->check_timeout();
@@ -296,15 +296,15 @@
         }
     }
 
-    template<typename T, typename C>
-    Stream<T, C> Stream<T, C>::reversed() {
-        this->check_timeout();
-        MutableSequence<T, C> buff_ms = this->stream_data.reversed();
-        Stream<T, C> buff(buff_ms);
-        return buff;
-    }
+template<typename T, class C>
+Stream<T, C> Stream<T, C>::reversed() {
+    this->check_timeout();
+    MutableSequence<T, C> buff_ms = this->stream_data.reversed();
+    Stream<T, C> buff(buff_ms);
+    return buff;
+}
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C> &Stream<T, C>::operator=(const Stream<T, C> &S) {
         this->check_timeout();
         if (this == &S){
@@ -322,7 +322,7 @@
         return *this;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C> Stream<T, C>::operator+(Stream<T, C> &S) {
         this->check_timeout();
         Stream<T, C> buff(*this);
@@ -332,25 +332,25 @@
         return buff;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     MutableSequence<T, C> Stream<T, C>::operator*() {
         this->check_timeout();
         return this->stream_data;
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     auto Stream<T, C>::begin() {
         this->check_timeout();
         return this->stream_data.begin();
     }
 
-    template<typename T, typename C>
+    template<typename T, class C>
     auto Stream<T, C>::end() {
         return this->stream_data.end();
     }
 
 
-    template<typename T, typename C>
+    template<typename T, class C>
     Stream<T, C>::~Stream() = default;
 
 #endif

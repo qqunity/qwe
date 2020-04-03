@@ -35,7 +35,6 @@
             int length();
             void insert(int, T);
             Array<T> convert_to_array();
-            List<T> sorted(const std::string &);
             List<T> &operator = (const List<T> &);
             List<T> operator + (const List<T> &);
             bool operator == (const List<T> &);
@@ -426,26 +425,6 @@ template<typename T>
             buff = buff->get_next();
         }
         return arr;
-    }
-
-    template<typename T>
-    List<T> List<T>::sorted(const std::string& order) {
-        Array<T> arr((*this).convert_to_array());
-        BinaryHeap<T> b_h(arr);
-        if (order == "ASC") {
-            List<T> l_buff;
-            for (int i = 0; i < count; ++i){
-                l_buff.append(b_h.extract_min());
-            }
-            return l_buff;
-        }
-        else if (order == "DESC"){
-            List<T> l_buff;
-            for (int i = 0; i < count; ++i){
-                l_buff.prepend(b_h.extract_min());
-            }
-            return l_buff;
-        }
     }
 
     template<typename T>

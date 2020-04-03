@@ -29,7 +29,6 @@
             void insert(int, T);
             void set_element(int, T);
             void print_array();
-    //        void sorted(const std::string&);
             Array<T> &operator = (const Array<T> &);
             Array<T> operator + (const Array<T> &);
             bool operator == (const Array<T> &);
@@ -417,17 +416,5 @@
             }
         }
     }
-
-
-//    template<typename T>
-//    void Array<T>::sorted(const std::string& order) {
-//        if (order == "ASC") {
-//        }
-//        else if (order == "DESC"){
-//
-//        }
-//    }
-
-
 
 #endif

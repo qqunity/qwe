@@ -325,4 +325,20 @@ template<typename T, class C>
         return unzip_seq;
     }
 
+    template<typename seq_T, typename T, typename InputIterator, typename Function>
+    seq_T sorted(InputIterator first_it, InputIterator last_it, Function ratio_function){
+        ArraySequence<T> buff;
+        while (first_it != last_it){
+            buff.append((*first_it).get_data());
+            ++first_it;
+        }
+        int len = buff.length();
+        BinaryHeap<T> b_heap(buff, ratio_function);
+        seq_T buff_sorted;
+        for (int i = 0; i < len; ++i){
+            buff_sorted.append(b_heap.extract_min(ratio_function));
+        }
+        return buff_sorted;
+    }
+
 #endif

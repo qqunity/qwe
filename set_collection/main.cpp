@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include "sequence.h"
+#include "binary_heap.h"
+#include <cstdlib>
 
 //    class Car {
 //        private:
@@ -198,6 +200,14 @@ void test_zip_unzip() {
     ListSequence<ListSequence<int>> unzip_data = unzip<int>(zip_data);
 }
 int main() {
-   Stream<int, Sequence<int>> s;
+   srand( time( 0 ));
+   ListSequence<int> a;
+   for (int i = 0; i < 7; ++i){
+       a.append(rand() % 10);
+   }
+   auto sa = sorted<ArraySequence<int>, int>(a.begin(), a.end(), [](int a, int b) {
+       return a < b;
+   });
+   std::cout << a << std::endl << sa;
    return 0;
 }
