@@ -3,4 +3,4 @@ project(collections)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(collections main.cpp ArrayElement.h Exceptions.h Array.h BinaryHeap.h Utils.h ListElement.h List.h Sequence.h ArraySequence.h ListSequence.h Stream.h UnitTests.h)
+add_executable(collections main.cpp ArrayElement.h Exceptions.h Array.h BinaryHeap.h Utils.h ListElement.h List.h Sequence.h ArraySequence.h ListSequence.h Stream.h UnitTests.h Human.h Student.h Teacher.h Pair.h BaseTest.h)

@@ -55,75 +55,75 @@
             ~List();
 
             class ListIterator {
-            private:
-                ListElement<T> *curObj;
-            public:
-                ListIterator(ListElement<T> *obj) {
-                    this->curObj = obj;
-                }
-
-                ListElement<T> &operator+(int k) {
-                    ListElement<T> *buffObj = curObj;
-                    for (int i = 0; i < k && buffObj != nullptr; ++i) {
-                        buffObj = buffObj->getNextPtr();
+                private:
+                    ListElement<T> *curObj;
+                public:
+                    ListIterator(ListElement<T> *obj) {
+                        this->curObj = obj;
                     }
-                    return *buffObj;
-                }
 
-                ListElement<T> &operator-(int k) {
-                    ListElement<T> *buffObj = curObj;
-                    for (int i = 0; i < k && buffObj != nullptr; ++i) {
-                        buffObj = buffObj->getPrevPtr();
+                    ListElement<T> &operator+(int k) {
+                        ListElement<T> *buffObj = curObj;
+                        for (int i = 0; i < k && buffObj != nullptr; ++i) {
+                            buffObj = buffObj->getNextPtr();
+                        }
+                        return *buffObj;
                     }
-                    return *buffObj;
-                }
 
-                int operator-(const ListIterator &LstIt) {
-                    int i = 0;
-                    ListIterator BuffIt = LstIt;
-                    while (BuffIt != *this) {
-                        ++i;
-                        ++BuffIt;
+                    ListElement<T> &operator-(int k) {
+                        ListElement<T> *buffObj = curObj;
+                        for (int i = 0; i < k && buffObj != nullptr; ++i) {
+                            buffObj = buffObj->getPrevPtr();
+                        }
+                        return *buffObj;
                     }
-                    return i;
-                }
 
-                ListElement<T> &operator++(int) {
-                    this->curObj = this->curObj->getNextPtr();
-                    return *(this->curObj->getPrevPtr());
-                }
+                    int operator-(const ListIterator &LstIt) {
+                        int i = 0;
+                        ListIterator BuffIt = LstIt;
+                        while (BuffIt != *this) {
+                            ++i;
+                            ++BuffIt;
+                        }
+                        return i;
+                    }
 
-                ListElement<T> &operator--(int) {
-                    this->curObj = this->curObj->getPrevPtr();
-                    return *(this->curObj->getNextPtr());
-                }
+                    ListElement<T> &operator++(int) {
+                        this->curObj = this->curObj->getNextPtr();
+                        return *(this->curObj->getPrevPtr());
+                    }
 
-                ListElement<T> &operator++() {
-                    this->curObj = this->curObj->getNextPtr();
-                    return *this->curObj;
-                }
+                    ListElement<T> &operator--(int) {
+                        this->curObj = this->curObj->getPrevPtr();
+                        return *(this->curObj->getNextPtr());
+                    }
 
-                ListElement<T> &operator--() {
-                    this->curObj = this->curObj->getPrevPtr();
-                    return *this->curObj;
-                }
+                    ListElement<T> &operator++() {
+                        this->curObj = this->curObj->getNextPtr();
+                        return *this->curObj;
+                    }
 
-                ListElement<T> &operator=(ListElement<T> &LstEl) {
-                    this->curObj = &LstEl;
-                    return *(this->curObj);
-                }
+                    ListElement<T> &operator--() {
+                        this->curObj = this->curObj->getPrevPtr();
+                        return *this->curObj;
+                    }
 
-                bool operator!=(const ListIterator &LstIt) {
-                    return this->curObj != LstIt.curObj;
-                }
+                    ListElement<T> &operator=(ListElement<T> &LstEl) {
+                        this->curObj = &LstEl;
+                        return *(this->curObj);
+                    }
 
-                bool operator==(const ListIterator &LstIt) {
-                    return this->curObj == LstIt.curObj;
-                }
+                    bool operator!=(const ListIterator &LstIt) {
+                        return this->curObj != LstIt.curObj;
+                    }
 
-                ListElement<T> &operator*() {
-                    return *this->curObj;
-                }
+                    bool operator==(const ListIterator &LstIt) {
+                        return this->curObj == LstIt.curObj;
+                    }
+
+                    ListElement<T> &operator*() {
+                        return *this->curObj;
+                    }
             };
 
             ListIterator begin();

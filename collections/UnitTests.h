@@ -59,32 +59,38 @@
                 }
             }
             catch (arrayException::ArrayException &exception) {
-                std::cerr << "An array exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "An array exception occurred ( " + exception.what() + " )\x1b[0m";
             }
             catch (arrayException::ArrayElementException &exception) {
-                std::cerr << "An array element exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "An array element exception occurred ( " + exception.what() + " )\x1b[0m";
             }
             catch (listException::ListException &exception) {
-                std::cerr << "A list exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "A list exception occurred ( " + exception.what() + " )\x1b[0m";
             }
             catch (listException::ListElementException &exception) {
-                std::cerr << "A list element exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "A list element exception occurred ( " + exception.what() + " )\x1b[0m";
             }
             catch (streamException::StreamException &exception) {
-                std::cerr << "A stream exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "A stream exception occurred ( " + exception.what() + " )\x1b[0m";
             }
             catch (std::exception &exception) {
-                std::cerr << "Some other std::exception occurred (" << exception.what() << ")" << std::endl;
+                this->testStatus = statusCode::testingError;
+                this->testMessage = "Error in the <" + this->testName + "> test!" + " | \x1b[31m" + "Some other std::exception occurred ( " + exception.what() + " )\x1b[0m";
             }
         }
 
         template<typename Function>
         void Test<Function>::getTestResult() {
             if (this->testStatus == statusCode::testingError) {
-                std::cout << "ERR  | " + this->testMessage + " |" << std::endl;
+                std::cout << "\x1b[31mERR\x1b[0m" << "  | " + this->testMessage + " |" << std::endl;
             }
             else  if (this->testStatus == statusCode::successTesting) {
-                std::cout << "OK   | " + this->testMessage + " |" << std::endl;
+                std::cout << "\x1b[32mOK\x1b[0m"  << "   | " + this->testMessage + " |" << std::endl;
             }
             else if (this->testStatus == statusCode::waitingForTesting) {
                 std::cout << "WAIT | Waiting the <" + this->testName + "> test! |" << std::endl;
@@ -124,7 +130,6 @@
                 void startTest(int);
                 void startTests(int *, int);
                 void startTests();
-                void getTestIfno(int);
                 ~UnitTests();
         };
 
@@ -156,18 +161,19 @@
         template<typename Function>
         void UnitTests<Function>::startTest(int index) {
             if (this->testsConditions[index] == testMarks::wait) {
-                std::cout << "Test " << index << " |";
+                std::cout << "Test " << index << " | ";
                 this->tests[index].startTest();
+                this->tests[index].getTestResult();
                 this->testsConditions[index] = this->tests[index].getTestStatus();
             }
             else if (this->testsConditions[index] == testMarks::skip) {
-                std::cout << "Test " << index << " | <" << this->tests[index].getTetsName() << "> skipped |" << std::endl;
+                std::cout << "Test " << index << " | " << "\x1b[33mSKIP\x1b[0m" << " | Skip the <" << this->tests[index].getTestName() << "> test! |" << std::endl;
             }
             else if (this->testsConditions[index] == testMarks::error) {
-                std::cout << "Test " << index << " | " << "ERR  | " + this->tests[index].getTestMessage() + " |" << std::endl;
+                std::cout << "Test " << index << " | " << "\x1b[31mERR\x1b[0m" << "  | " + this->tests[index].getTestMessage() + " |" << std::endl;
             }
             else if (this->testsConditions[index] == testMarks::pass) {
-                std::cout << "Test " << index << " | " << "OK   | " + this->tests[index].getTestMessage() + " |" << std::endl;
+                std::cout << "Test " << index << " | " "\x1b[32mOK\x1b[0m"  << "   | " + this->tests[index].getTestMessage() + " |" << std::endl;
             }
         }
 
@@ -188,4 +194,6 @@
         template<typename Function>
         UnitTests<Function>::~UnitTests() = default;
     }
+
+
 #endif

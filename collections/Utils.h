@@ -7,6 +7,7 @@
     #include "List.h"
     #include <cstdarg>
     #include <algorithm>
+    #include "Exceptions.h"
 
     namespace utils {
         template<typename SeqType, typename T, typename InputIterator, typename Function>
@@ -74,6 +75,80 @@
                 --it2;
                 ++i;
             }
+        }
+
+        template<typename seqType, typename InputIterator>
+        seqType getSubSequence(InputIterator firstIt, InputIterator lastIt, int index1, int index2) {
+            if (index1 >= 0 && index1 < (lastIt - firstIt) && index2 >=0 && index2 < (lastIt - firstIt)) {
+                int i = 0;
+                if (index2 < index1) {
+                    int buff = index1;
+                    index1 = index2;
+                    index2 = buff;
+                }
+                seqType subSeq;
+                while (firstIt != lastIt) {
+                    if (i >= index1 && i <= index2) {
+                        subSeq.append(*firstIt);
+                    }
+                    ++firstIt;
+                    ++i;
+                }
+                return subSeq;
+            }
+            else {
+                throw utilsException::UtilsException("Index out of range!");
+            }
+        }
+
+        template<typename InputIteratorSeq, typename subSeqType>
+        int getIndexOfSubseq(InputIteratorSeq firstItSeq, InputIteratorSeq lastItSeq, subSeqType subSeq) {
+            if (subSeq.length() <= (lastItSeq - firstItSeq)) {
+                int i = 0;
+                int j = 0;
+                InputIteratorSeq buffItSeq(nullptr);
+                bool flag;
+                while (firstItSeq != lastItSeq && (lastItSeq - firstItSeq) >= subSeq.length()) {
+                    buffItSeq = firstItSeq;
+                    j = 0;
+                    flag = true;
+                    while (j < subSeq.length()) {
+                        if (subSeq[j] != *buffItSeq) {
+                            flag = false;
+                            break;
+                        }
+                        ++buffItSeq;
+                        ++j;
+                    }
+                    if (flag) {
+                        return i;
+                    }
+                    ++firstItSeq;
+                    ++i;
+                }
+                return -1;
+            }
+            else {
+                throw utilsException::UtilsException("It is not possible to compare sequence of different lengths!");
+            }
+        }
+
+        template<typename T, typename InputIterator>
+        list::List<list::List<T>> splitByLabel(InputIterator firstItSeq, InputIterator lastItSeq, T param){
+            list::List<list::List<T>> splitSeq;
+            list::List<T> buffSeq;
+            while (firstItSeq != lastItSeq) {
+                if (*firstItSeq == param) {
+                    splitSeq.append(buffSeq);
+                    buffSeq.remove();
+                }
+                else {
+                    buffSeq.append(*firstItSeq);
+                }
+                ++firstItSeq;
+            }
+            splitSeq.append(buffSeq);
+            return splitSeq;
         }
     }
 

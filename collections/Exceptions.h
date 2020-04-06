@@ -9,7 +9,7 @@
             private:
                 std::string errorMessage;
             public:
-                explicit ArrayElementException(std::string);
+                ArrayElementException(std::string);
 
                 const char *what() const noexcept override;
 
@@ -53,7 +53,7 @@
         private:
             std::string errorMessage;
         public:
-            explicit ListElementException(std::string);
+            ListElementException(std::string);
 
             const char *what() const noexcept override;
 
@@ -113,6 +113,29 @@
         }
 
         StreamException::~StreamException() = default;
+    }
+
+    namespace utilsException {
+        class UtilsException: public std::exception {
+            private:
+                std::string errorMessage;
+            public:
+                UtilsException(std::string);
+
+                const char *what() const noexcept override;
+
+                ~UtilsException();
+        };
+
+        UtilsException::UtilsException(std::string error) {
+            this->errorMessage = std::move(error);
+        }
+
+        const char *UtilsException::what() const noexcept {
+            return this->errorMessage.c_str();
+        }
+
+        UtilsException::~UtilsException() = default;
     }
 
 #endif
