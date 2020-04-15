@@ -22,7 +22,8 @@
             int getGroupNumber();
             float getAverageMark();
             ~Student();
-            friend std::ostream &operator<<(std::ostream &, Student &);
+            bool operator == (Student);
+            friend std::ostream &operator<<(std::ostream &, Student);
     };
 
     Student::Student(std::string name, int weight, int height, int humanGender, int age, std::string nameOfTheEduInstitution, int course, int groupNumber, float averageMark): Human(name, weight, height, humanGender, age) {
@@ -64,12 +65,18 @@
         return this->averageMark;
     }
 
-    std::ostream &operator<<(std::ostream &out, Student &S) {
+    std::ostream &operator<<(std::ostream &out, Student S) {
         out << "Student: {" << S.getName() << ", " << S.getAge() << ", " << S.getNameOfTheEduInstitution() << ", " << S.getCourse() << ", " << S.getGroupNumber() << ", " << S.getAverageMark() << "}";
         return out;
     }
 
-    Student::Student() = default;
+bool Student::operator==(Student S) {
+    return this->getName() == S.getName() && this->getAge() == S.getAge() &&
+           this->getGender() == S.getGender() && this->getHeight() == S.getHeight() && this->getWeight() == S.getWeight() &&
+            this->groupNumber == S.getGroupNumber() && this->course == S.getCourse();
+}
+
+Student::Student() = default;
 
     Student::~Student() = default;
 

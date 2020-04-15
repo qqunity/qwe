@@ -9,6 +9,7 @@
             T1 element1;
             T2 element2;
         public:
+            Pair();
             Pair(T1, T2);
             Pair(const Pair<T1, T2> &);
             void setFirst(T1);
@@ -16,7 +17,8 @@
             T1 getFirst();
             T2 getSecond();
             Pair<T1, T2> &operator = (const Pair<T1, T2> &);
-            template<typename T11, typename T22>friend std::ostream &operator<<(std::ostream &, Pair<T11, T22> &);
+            bool operator == (Pair<T1, T2>);
+            template<typename T11, typename T22>friend std::ostream &operator<<(std::ostream &, Pair<T11, T22>);
     };
 
     template<typename T1, typename T2>
@@ -62,9 +64,17 @@
     }
 
     template<typename T11, typename T22>
-    std::ostream &operator<<(std::ostream &out, Pair<T11, T22> &P) {
-        out << "<" << P.element1 << ", " << P.element2 << ">";
+    std::ostream &operator<<(std::ostream &out, Pair<T11, T22> P) {
+        out << "<" << P.getFirst() << ", " << P.getSecond() << ">";
         return out;
     }
+
+    template<typename T1, typename T2>
+    bool Pair<T1, T2>::operator==(Pair<T1, T2> P) {
+        return this->element1 == P.getFirst() && this->element2 == P.getSecond();
+    }
+
+    template<typename T1, typename T2>
+    Pair<T1, T2>::Pair() = default;
 
 #endif

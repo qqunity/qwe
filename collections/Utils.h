@@ -10,6 +10,7 @@
     #include "Exceptions.h"
 
     namespace utils {
+
         template<typename SeqType, typename T, typename InputIterator, typename Function>
         SeqType sorted(InputIterator firstIt, InputIterator lastIt, Function ratioFunction) {
             array::Array<T> BuffArray;

@@ -18,7 +18,8 @@
             std::string getSubjectOfTeaching();
             int getDepartmentNumber();
             ~Teacher();
-            friend std::ostream &operator<<(std::ostream &, Teacher &);
+            bool operator == (Teacher);
+            friend std::ostream &operator<<(std::ostream &, Teacher);
     };
 
     Teacher::Teacher(std::string name, int weight, int height, int humanGender, int age, std::string nameOfTheEduInstitution, std::string subjectOfTeaching, int departmentNumber): Human(name, weight, height, humanGender, age) {
@@ -51,12 +52,18 @@
         return this->departmentNumber;
     }
 
-    std::ostream &operator<<(std::ostream &out, Teacher &T) {
+    std::ostream &operator<<(std::ostream &out, Teacher T) {
         out << "Teacher: {" << T.getName() << ", " << T.getAge() << ", " << T.getNameOfTheEduInstitution() << ", " << T.getSubjectOfTeaching() << ", " << T.getDepartmentNumber() << "}";
         return out;
     }
 
-    Teacher::Teacher() = default;
+    bool Teacher::operator==(Teacher T) {
+        return this->departmentNumber == T.getDepartmentNumber() && this->subjectOfTeaching == T.subjectOfTeaching &&
+                this->nameOfTheEduInstitution == T.nameOfTheEduInstitution && this->getName() == T.getName() && this->getAge() == T.getAge() &&
+                this->getGender() == T.getGender() && this->getHeight() == T.getHeight() && this->getWeight() == T.getWeight();
+    }
+
+Teacher::Teacher() = default;
 
     Teacher::~Teacher() = default;
 

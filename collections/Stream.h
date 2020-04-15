@@ -266,7 +266,7 @@
         }
 
         template<typename T>
-        Stream<T>::Stream(sequence::Sequence<T> *Seq, std::string baseTypeOfSequense) {
+        Stream<T>::Stream(sequence::Sequence<T> *Seq, std::string baseTypeOfSequense) { //dynamic_cast
             this->abilityToWrite = true;
             this->abilityToRead = true;
             this->abilityToSeek = true;
@@ -297,7 +297,7 @@
         }
 
         template<typename T>
-        void *Stream<T>::front() {
+        void *Stream<T>::front() { //T *
             checkTimeout();
             if (this->abilityToSeek){
                 return this->streamData->getLast();
@@ -308,7 +308,7 @@
         }
 
         template<typename T>
-        void *Stream<T>::back() {
+        void *Stream<T>::back() { //T *
             checkTimeout();
             if (this->abilityToSeek){
                 return this->streamData->getFirst();
@@ -425,7 +425,7 @@
         template<typename Iterator, typename castType>
         Iterator Stream<T>::begin() {
             checkTimeout();
-            return dynamic_cast<castType>(this->streamData)->begin();
+            return dynamic_cast<castType>(this->streamData)->begin(); //check
         }
 
         template<typename T>

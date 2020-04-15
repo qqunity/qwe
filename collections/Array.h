@@ -2,6 +2,7 @@
 #define COLLECTIONS_ARRAY_H
 
     #include "ArrayElement.h"
+    #include <iostream>
 
     namespace array {
         template<typename T>
@@ -151,7 +152,8 @@
                 this->data = new ArrayElement<T>[1];
                 this->data[0] = val;
                 ++this->size;
-            } else {
+            }
+            else {
                 Array<T> BuffArr(*this);
                 delete[] this->data;
                 this->data = new ArrayElement<T>[this->size + 1];
@@ -256,7 +258,7 @@
         template<typename T>
         int Array<T>::getIndex(T val) {
             for (int i = 0; i < this->size; ++i) {
-                if (this->data[i] == val) {
+                if (this->data[i].getValue() == val) {
                     return i;
                 }
             }
@@ -289,7 +291,7 @@
         }
 
         template<typename T>
-        ArrayElement<T> * Array<T>::getLast() {
+        ArrayElement<T> *Array<T>::getLast() {
             return &this->data[this->size - 1];
         }
 
