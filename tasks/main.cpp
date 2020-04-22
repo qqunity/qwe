@@ -1,13 +1,10 @@
-#include <iostream>
-#include "List.h"
+#include "MathPhraseParser.h"
 
 int main() {
-    List<int> l;
-    for(int i = 0; i < 7; ++i){
-        l.append(i);
-    }
-    List<int> l2 (l);
-    l2[5] = 8738453;
-    std::cout << l << std::endl << l2 << std::endl  << (l != l2);
+    MathPhraseParser p("((3.0+4.0))+4.0*(5.0-4.0*(1.0-(1.0-1.0)))*2.0+2.0*(3.0+4.0*(2.0-1.0))");
+    p.parse();
+    p.printPhraseTree();
+    p.calculate();
+    std::cout << p.getAnswer();
     return 0;
 }

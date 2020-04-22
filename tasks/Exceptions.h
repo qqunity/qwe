@@ -1,4 +1,3 @@
-#pragma once
 #ifndef TASKS_EXCEPTIONS_H
 #define TASKS_EXCEPTIONS_H
     #include <exception>
@@ -45,4 +44,25 @@
     }
 
     ListException::~ListException() = default;
+
+    class TreeNodeException: public std::exception {
+    private:
+        std::string errorMessage;
+    public:
+        TreeNodeException(std::string error);
+
+        const char *what() const noexcept override;
+
+        ~TreeNodeException();
+    };
+
+    TreeNodeException::TreeNodeException(std::string error) {
+        this->errorMessage = std::move(error);
+    }
+
+    const char *TreeNodeException::what() const noexcept {
+        return this->errorMessage.c_str();
+    }
+
+    TreeNodeException::~TreeNodeException() = default;
 #endif
