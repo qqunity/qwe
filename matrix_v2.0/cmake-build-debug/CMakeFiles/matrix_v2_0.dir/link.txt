@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/matrix_v2_0.dir/main.c.o  -o matrix_v2_0 

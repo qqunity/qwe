@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/main.c
+matrix.h
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/matrix.h
+test.h
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/test.h
+
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/matrix.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/test.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+matrix.h
+/media/qunity/Workspace/CPP_projects/qwe/matrix_v2.0/matrix.h
+
