@@ -1,3 +1,0 @@
-/media/qunity/Workspace/CPP_projects/qwe/Tic-Tac-Toe_game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/qunity/Workspace/CPP_projects/qwe/Tic-Tac-Toe_game/cmake-build-debug/CMakeFiles/edit_cache.dir
-/media/qunity/Workspace/CPP_projects/qwe/Tic-Tac-Toe_game/cmake-build-debug/CMakeFiles/Tic_Tac_Toe_game.dir
