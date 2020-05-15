@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/tasks.dir/main.cpp.o CMakeFiles/tasks.dir/TreeNode.cpp.o CMakeFiles/tasks.dir/MathPhraseParser.cpp.o  -o tasks 

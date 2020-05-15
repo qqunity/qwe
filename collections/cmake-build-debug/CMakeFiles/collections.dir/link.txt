@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/collections.dir/main.cpp.o  -o collections 

@@ -1,4 +1,0 @@
-/home/qunity/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.7223.86/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /media/qunity/Workspace/CPP_projects/qwe/tasks
--- Configuring done
--- Generating done
--- Build files have been written to: /media/qunity/Workspace/CPP_projects/qwe/tasks/cmake-build-debug
