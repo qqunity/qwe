@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="collections" targetName="collections" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3758598a-4ff7-43b4-88b0-b48f7c595e58" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Array.h" beforeDir="false" afterPath="$PROJECT_DIR$/Array.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/BaseTest.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pair.h" beforeDir="false" afterPath="$PROJECT_DIR$/Pair.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stream.h" beforeDir="false" afterPath="$PROJECT_DIR$/Stream.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student.h" beforeDir="false" afterPath="$PROJECT_DIR$/Student.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher.h" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="p9ov3df0" />
+  </component>
+  <component name="ProjectId" id="1Zz9OZPGbhVaiUiwzzvW4eriIJS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunManager">
+    <configuration name="collections" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="collections" TARGET_NAME="collections" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="collections" RUN_TARGET_NAME="collections">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3758598a-4ff7-43b4-88b0-b48f7c595e58" name="Default Changelist" comment="" />
+      <created>1585831023932</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585831023932</updated>
+      <workItem from="1585831025623" duration="22028000" />
+      <workItem from="1585888885717" duration="35466000" />
+      <workItem from="1585931570220" duration="4241000" />
+      <workItem from="1586152412977" duration="27129000" />
+      <workItem from="1586335906059" duration="8000" />
+      <workItem from="1586930425195" duration="799000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added collections">
+      <created>1585895304528</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585895304528</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added collections v1.1">
+      <created>1585895355670</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1585895355670</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added collections v1.5">
+      <created>1585931280622</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585931280622</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added collections v1.8">
+      <created>1586171909908</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1586171909908</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added collections" />
+    <MESSAGE value="Added collections v1.1" />
+    <MESSAGE value="Added collections v1.5" />
+    <MESSAGE value="Added collections v1.8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added collections v1.8" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="486" y="27" width="937" height="999" key="CommitChangelistDialog2" timestamp="1586171909692">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="486" y="27" width="937" height="999" key="CommitChangelistDialog2/0.27.1920.999@0.27.1920.999" timestamp="1586171909692" />
+    <state x="737" y="273" width="424" height="520" key="FileChooserDialogImpl" timestamp="1586931218672">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="737" y="273" width="424" height="520" key="FileChooserDialogImpl/0.27.1920.999@0.27.1920.999" timestamp="1586931218672" />
+    <state width="1874" height="357" key="GridCell.Tab.0.bottom" timestamp="1586186019237">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="357" key="GridCell.Tab.0.bottom/0.27.1920.999@0.27.1920.999" timestamp="1586186019237" />
+    <state width="1874" height="357" key="GridCell.Tab.0.center" timestamp="1586186019237">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="357" key="GridCell.Tab.0.center/0.27.1920.999@0.27.1920.999" timestamp="1586186019237" />
+    <state width="1874" height="357" key="GridCell.Tab.0.left" timestamp="1586186019236">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="357" key="GridCell.Tab.0.left/0.27.1920.999@0.27.1920.999" timestamp="1586186019236" />
+    <state width="1874" height="357" key="GridCell.Tab.0.right" timestamp="1586186019237">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="357" key="GridCell.Tab.0.right/0.27.1920.999@0.27.1920.999" timestamp="1586186019237" />
+    <state width="1874" height="307" key="GridCell.Tab.1.bottom" timestamp="1585931295561">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.bottom/0.27.1920.999@0.27.1920.999" timestamp="1585931295561" />
+    <state width="1874" height="307" key="GridCell.Tab.1.center" timestamp="1585931295561">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.center/0.27.1920.999@0.27.1920.999" timestamp="1585931295561" />
+    <state width="1874" height="307" key="GridCell.Tab.1.left" timestamp="1585931295561">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.left/0.27.1920.999@0.27.1920.999" timestamp="1585931295561" />
+    <state width="1874" height="307" key="GridCell.Tab.1.right" timestamp="1585931295561">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.right/0.27.1920.999@0.27.1920.999" timestamp="1585931295561" />
+    <state x="555" y="258" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586171919388">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="555" y="258" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.999@0.27.1920.999" timestamp="1586171919388" />
+  </component>
+</project>

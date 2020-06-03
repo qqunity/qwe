@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Tic_Tac_Toe_game" targetName="Tic_Tac_Toe_game" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77b0c779-912f-40dd-a49e-b32ba3050af6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1btzFpLc8qv1AqpYNk1Qozo9RN6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Tic_Tac_Toe_game" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Tic_Tac_Toe_game" TARGET_NAME="Tic_Tac_Toe_game" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Tic_Tac_Toe_game" RUN_TARGET_NAME="Tic_Tac_Toe_game">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77b0c779-912f-40dd-a49e-b32ba3050af6" name="Default Changelist" comment="" />
+      <created>1589466078084</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589466078084</updated>
+      <workItem from="1589466091399" duration="16339000" />
+      <workItem from="1589516157733" duration="15651000" />
+      <workItem from="1589552571728" duration="22364000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="627" y="318" width="656" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589553383188">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="627" y="318" width="656" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.999@0.27.1920.999" timestamp="1589553383188" />
+    <state x="742" y="273" width="424" height="520" key="FileChooserDialogImpl" timestamp="1589575287735">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="742" y="273" width="424" height="520" key="FileChooserDialogImpl/0.27.1920.999@0.27.1920.999" timestamp="1589575287735" />
+    <state width="1874" height="307" key="GridCell.Tab.0.bottom" timestamp="1589575291639">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.0.bottom/0.27.1920.999@0.27.1920.999" timestamp="1589575291639" />
+    <state width="1874" height="307" key="GridCell.Tab.0.center" timestamp="1589575291638">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.0.center/0.27.1920.999@0.27.1920.999" timestamp="1589575291638" />
+    <state width="1874" height="307" key="GridCell.Tab.0.left" timestamp="1589575291638">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.0.left/0.27.1920.999@0.27.1920.999" timestamp="1589575291638" />
+    <state width="1874" height="307" key="GridCell.Tab.0.right" timestamp="1589575291638">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.0.right/0.27.1920.999@0.27.1920.999" timestamp="1589575291638" />
+    <state width="1874" height="307" key="GridCell.Tab.1.bottom" timestamp="1589575291639">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.bottom/0.27.1920.999@0.27.1920.999" timestamp="1589575291639" />
+    <state width="1874" height="307" key="GridCell.Tab.1.center" timestamp="1589575291639">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.center/0.27.1920.999@0.27.1920.999" timestamp="1589575291639" />
+    <state width="1874" height="307" key="GridCell.Tab.1.left" timestamp="1589575291639">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.left/0.27.1920.999@0.27.1920.999" timestamp="1589575291639" />
+    <state width="1874" height="307" key="GridCell.Tab.1.right" timestamp="1589575291639">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="307" key="GridCell.Tab.1.right/0.27.1920.999@0.27.1920.999" timestamp="1589575291639" />
+    <state x="449" y="161" width="1022" height="737" key="SettingsEditor" timestamp="1589472221090">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="449" y="161" width="1022" height="737" key="SettingsEditor/0.27.1920.999@0.27.1920.999" timestamp="1589472221090" />
+  </component>
+</project>

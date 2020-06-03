@@ -1,0 +1,3 @@
+/media/qunity/Workspace/CPP_projects/qwe/TicTacToeGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/qunity/Workspace/CPP_projects/qwe/TicTacToeGame/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/qunity/Workspace/CPP_projects/qwe/TicTacToeGame/cmake-build-debug/CMakeFiles/TicTacToeGame.dir

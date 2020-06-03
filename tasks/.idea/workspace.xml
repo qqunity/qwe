@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="tasks" targetName="tasks" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1076064f-272d-4f2f-810e-f2c7ef9b7776" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="pv3n9pad" />
+  </component>
+  <component name="ProjectId" id="1aZ7NvtPGD9kzDz5y944mG1n8gN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.valgrind" />
+  </component>
+  <component name="RunManager">
+    <configuration name="tasks" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="tasks" TARGET_NAME="tasks" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="tasks" RUN_TARGET_NAME="tasks">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1076064f-272d-4f2f-810e-f2c7ef9b7776" name="Default Changelist" comment="" />
+      <created>1586931225361</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586931225361</updated>
+      <workItem from="1586931227060" duration="20346000" />
+      <workItem from="1587060294423" duration="599000" />
+      <workItem from="1587124031373" duration="1221000" />
+      <workItem from="1587535159959" duration="15917000" />
+      <workItem from="1588786983169" duration="124000" />
+      <workItem from="1588787119447" duration="60000" />
+      <workItem from="1588851684888" duration="1401000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added task on smart pointer">
+      <created>1586963403042</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586963403042</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added math phrase parser">
+      <created>1587554883208</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587554883208</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added task on smart pointer" />
+    <MESSAGE value="Added math phrase parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added math phrase parser" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="184" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588852885816">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="418" y="184" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.999@0.27.1920.999" timestamp="1588852885816" />
+    <state x="617" y="318" width="676" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588787065265">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="617" y="318" width="676" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.999@0.27.1920.999" timestamp="1588787065265" />
+    <state x="497" y="27" width="916" height="999" key="CommitChangelistDialog2" timestamp="1587554883038">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="497" y="27" width="916" height="999" key="CommitChangelistDialog2/0.27.1920.999@0.27.1920.999" timestamp="1587554883038" />
+    <state x="737" y="273" width="424" height="520" key="FileChooserDialogImpl" timestamp="1588862988486">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="737" y="273" width="424" height="520" key="FileChooserDialogImpl/0.27.1920.999@0.27.1920.999" timestamp="1588862988486" />
+    <state width="1874" height="247" key="GridCell.Tab.0.bottom" timestamp="1588787180746">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="247" key="GridCell.Tab.0.bottom/0.27.1920.999@0.27.1920.999" timestamp="1588787180746" />
+    <state width="1874" height="247" key="GridCell.Tab.0.center" timestamp="1588787180746">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="247" key="GridCell.Tab.0.center/0.27.1920.999@0.27.1920.999" timestamp="1588787180746" />
+    <state width="1874" height="247" key="GridCell.Tab.0.left" timestamp="1588787180745">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="247" key="GridCell.Tab.0.left/0.27.1920.999@0.27.1920.999" timestamp="1588787180745" />
+    <state width="1874" height="247" key="GridCell.Tab.0.right" timestamp="1588787180746">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="247" key="GridCell.Tab.0.right/0.27.1920.999@0.27.1920.999" timestamp="1588787180746" />
+    <state width="1874" height="297" key="GridCell.Tab.1.bottom" timestamp="1586977357203">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="297" key="GridCell.Tab.1.bottom/0.27.1920.999@0.27.1920.999" timestamp="1586977357203" />
+    <state width="1874" height="297" key="GridCell.Tab.1.center" timestamp="1586977357203">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="297" key="GridCell.Tab.1.center/0.27.1920.999@0.27.1920.999" timestamp="1586977357203" />
+    <state width="1874" height="297" key="GridCell.Tab.1.left" timestamp="1586977357203">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="297" key="GridCell.Tab.1.left/0.27.1920.999@0.27.1920.999" timestamp="1586977357203" />
+    <state width="1874" height="297" key="GridCell.Tab.1.right" timestamp="1586977357203">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state width="1874" height="297" key="GridCell.Tab.1.right/0.27.1920.999@0.27.1920.999" timestamp="1586977357203" />
+    <state x="449" y="161" width="1022" height="737" key="SettingsEditor" timestamp="1588787155174">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="449" y="161" width="1022" height="737" key="SettingsEditor/0.27.1920.999@0.27.1920.999" timestamp="1588787155174" />
+    <state x="555" y="258" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1587554897260">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="555" y="258" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.999@0.27.1920.999" timestamp="1587554897260" />
+    <state x="624" y="238" key="run.anything.popup" timestamp="1586957490884">
+      <screen x="0" y="27" width="1920" height="999" />
+    </state>
+    <state x="624" y="238" key="run.anything.popup/0.27.1920.999@0.27.1920.999" timestamp="1586957490884" />
+  </component>
+</project>
