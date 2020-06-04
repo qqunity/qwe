@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/ForwardList.h
+ListElement.h
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/ListElement.h
+
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/ListElement.h
+iostream
+-
+
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/main.cpp
+iostream
+-
+chrono
+-
+vector
+-
+ForwardList.h
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/ForwardList.h
+

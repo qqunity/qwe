@@ -1,0 +1,3 @@
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/qunity/Workspace/CPP_projects/qwe/forqard_list/cmake-build-debug/CMakeFiles/forqard_list.dir
