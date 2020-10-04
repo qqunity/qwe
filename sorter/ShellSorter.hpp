@@ -1,59 +1,46 @@
-#ifndef SORTER_HEAPSORTER_HPP
-#define SORTER_HEAPSORTER_HPP
-
+#ifndef SORTER_SHELLSORTER_HPP
+#define SORTER_SHELLSORTER_HPP
 #include "ISorter.hpp"
-#include <fstream>
-#include <iostream>
 #include <chrono>
 
 namespace sorter {
-
     template<typename T>
-    class HeapSorter: public ISorter<T> {
+    class ShellSorter: public ISorter<T> {
     public:
-        HeapSorter();
-
-        void heapify(sequence::Sequence<T> *seq, unsigned int n, unsigned int index, bool (*cmp) (T value1, T value2));
+        ShellSorter();
 
         sequence::Sequence<T> *sort(sequence::Sequence<T> *seq, bool (*cmp) (T value1, T value2)) override;
 
         void writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems, unsigned int step, std::string filePath) override;
 
-        ~HeapSorter();
+        ~ShellSorter();
     };
 
     template<typename T>
-    void HeapSorter<T>::heapify(sequence::Sequence<T> *seq, unsigned int n, unsigned int index, bool (*cmp)(T value1, T value2)) {
-        ++this->cntIterations;
-
-        unsigned int largest = index;
-        unsigned int l = 2 * index + 1;
-        unsigned int r = 2 * index + 2;
-
-        if (l < n && cmp((*seq)[l]->getValue(), (*seq)[largest]->getValue())) {
-            largest = l;
-        }
-
-        if (r < n && cmp((*seq)[r]->getValue(), (*seq)[largest]->getValue())) {
-            largest = r;
-        }
-
-        if (largest != index) {
-            seq->swap(index, largest);
-            this->heapify(seq, n, largest, cmp);
-        }
-
-    }
+    ShellSorter<T>::ShellSorter(): ISorter<T>() {}
 
     template<typename T>
-    sequence::Sequence<T> *HeapSorter<T>::sort(sequence::Sequence<T> *seq, bool (*cmp)(T, T)) {
+    sequence::Sequence<T> *ShellSorter<T>::sort(sequence::Sequence<T> *seq, bool (*cmp)(T, T)) {
         auto startTime = std::chrono::system_clock::now();
-        for (int i = (seq->length() / 2) - 1; i >= 0; --i) {
-            this->heapify(seq, seq->length(), i, cmp);
-        }
-        for (int i = seq->length() - 1; i >= 0; --i) {
-            seq->swap(0, i);
-            this->heapify(seq, i, 0, cmp);
+        int n = seq->length();
+        int i, j, step;
+        int tmp;
+        for (step = n / 2; step > 0; step /= 2) {
+            for (i = step; i < n; ++i) {
+                auto tmp = (*seq)[i]->getValue();
+                for (j = i; j >= step; j -= step) {
+                    if (!cmp(tmp, (*seq)[j - step]->getValue())) {
+                        (*seq)[j]->setValue((*seq)[j - step]->getValue());
+                    }
+                    else {
+                        break;
+                    }
+                    ++this->cntIterations;
+                }
+                (*seq)[j]->setValue(tmp);
+                ++this->cntIterations;
+            }
+            ++this->cntIterations;
         }
         auto endTime = std::chrono::system_clock::now();
         std::chrono::duration<double, std::milli> elapsedMilliseconds = endTime - startTime;
@@ -62,12 +49,8 @@ namespace sorter {
     }
 
     template<typename T>
-    HeapSorter<T>::HeapSorter(): ISorter<T>() {}
-
-    template<typename T>
-    void
-    HeapSorter<T>::writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems, unsigned int step,
-                                      std::string filePath) {
+    void ShellSorter<T>::writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems,
+                                            unsigned int step, std::string filePath) {
         std::ofstream out;
         out.open(filePath);
         if (out.is_open()) {
@@ -110,11 +93,9 @@ namespace sorter {
                 out << "DESC" << "\tsize: " << size << "\tcntIter: " << this->getCntIterations() << "\tcntMilliseconds: " << this->getNumberOfIterationMilliseconds() << '\n';
             }
         }
-
     }
 
     template<typename T>
-    HeapSorter<T>::~HeapSorter() = default;
+    ShellSorter<T>::~ShellSorter() = default;
 }
-
 #endif

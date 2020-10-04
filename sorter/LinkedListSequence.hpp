@@ -39,6 +39,8 @@ namespace list {
 
         unsigned int length() override;
 
+        LinkedList<T> &getRawData();
+
         typename LinkedList<T>::LinkedListIterator begin();
 
         typename LinkedList<T>::LinkedListIterator end();
@@ -136,6 +138,11 @@ namespace list {
     std::ostream &operator<<(std::ostream &out, const LinkedListSequence<T1> &listSeq) {
         out << listSeq.data;
         return out;
+    }
+
+    template<typename T>
+    LinkedList<T> &LinkedListSequence<T>::getRawData() {
+        return this->data;
     }
 }
 

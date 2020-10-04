@@ -1,60 +1,31 @@
-#ifndef SORTER_HEAPSORTER_HPP
-#define SORTER_HEAPSORTER_HPP
+#ifndef SORTER_QUICKSORTER_HPP
+#define SORTER_QUICKSORTER_HPP
 
 #include "ISorter.hpp"
-#include <fstream>
-#include <iostream>
 #include <chrono>
 
 namespace sorter {
-
-    template<typename T>
-    class HeapSorter: public ISorter<T> {
+    template <typename T>
+    class QuickSorter: public ISorter<T> {
     public:
-        HeapSorter();
+        QuickSorter();
 
-        void heapify(sequence::Sequence<T> *seq, unsigned int n, unsigned int index, bool (*cmp) (T value1, T value2));
+        void quickSort(sequence::Sequence<T> *seq, int first, int last, bool (*cmp) (T value1, T value2));
 
         sequence::Sequence<T> *sort(sequence::Sequence<T> *seq, bool (*cmp) (T value1, T value2)) override;
 
         void writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems, unsigned int step, std::string filePath) override;
 
-        ~HeapSorter();
+        ~QuickSorter();
     };
 
     template<typename T>
-    void HeapSorter<T>::heapify(sequence::Sequence<T> *seq, unsigned int n, unsigned int index, bool (*cmp)(T value1, T value2)) {
-        ++this->cntIterations;
-
-        unsigned int largest = index;
-        unsigned int l = 2 * index + 1;
-        unsigned int r = 2 * index + 2;
-
-        if (l < n && cmp((*seq)[l]->getValue(), (*seq)[largest]->getValue())) {
-            largest = l;
-        }
-
-        if (r < n && cmp((*seq)[r]->getValue(), (*seq)[largest]->getValue())) {
-            largest = r;
-        }
-
-        if (largest != index) {
-            seq->swap(index, largest);
-            this->heapify(seq, n, largest, cmp);
-        }
-
-    }
+    QuickSorter<T>::QuickSorter(): ISorter<T>() {}
 
     template<typename T>
-    sequence::Sequence<T> *HeapSorter<T>::sort(sequence::Sequence<T> *seq, bool (*cmp)(T, T)) {
+    sequence::Sequence<T> *QuickSorter<T>::sort(sequence::Sequence<T> *seq, bool (*cmp)(T, T)) {
         auto startTime = std::chrono::system_clock::now();
-        for (int i = (seq->length() / 2) - 1; i >= 0; --i) {
-            this->heapify(seq, seq->length(), i, cmp);
-        }
-        for (int i = seq->length() - 1; i >= 0; --i) {
-            seq->swap(0, i);
-            this->heapify(seq, i, 0, cmp);
-        }
+        this->quickSort(seq, 0, seq->length() - 1, cmp);
         auto endTime = std::chrono::system_clock::now();
         std::chrono::duration<double, std::milli> elapsedMilliseconds = endTime - startTime;
         this->numberOfIterationMilliseconds = elapsedMilliseconds.count();
@@ -62,12 +33,37 @@ namespace sorter {
     }
 
     template<typename T>
-    HeapSorter<T>::HeapSorter(): ISorter<T>() {}
+    void QuickSorter<T>::quickSort(sequence::Sequence<T> *seq, int first, int last, bool (*cmp) (T value1, T value2)) {
+        ++this->cntIterations;
+        int f = first, l = last;
+        auto mid = (*seq)[(f+l) / 2]->getValue();
+        do {
+            while ((*seq)[f]->getValue() != mid && !cmp((*seq)[f]->getValue(), mid)) {
+                f++;
+                ++this->cntIterations;
+            }
+            while (cmp((*seq)[l]->getValue(), mid)) {
+                l--;
+                ++this->cntIterations;
+            }
+            if (f <= l){
+                seq->swap(f, l);
+                f++;
+                l--;
+            }
+            ++this->cntIterations;
+        } while (f < l);
+        if (first < l) {
+            this->quickSort(seq, first, l, cmp);
+        }
+        if (f < last) {
+            this->quickSort(seq, f, last, cmp);
+        }
+    }
 
     template<typename T>
-    void
-    HeapSorter<T>::writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems, unsigned int step,
-                                      std::string filePath) {
+    void QuickSorter<T>::writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems,
+                                            unsigned int step, std::string filePath) {
         std::ofstream out;
         out.open(filePath);
         if (out.is_open()) {
@@ -110,11 +106,9 @@ namespace sorter {
                 out << "DESC" << "\tsize: " << size << "\tcntIter: " << this->getCntIterations() << "\tcntMilliseconds: " << this->getNumberOfIterationMilliseconds() << '\n';
             }
         }
-
     }
 
     template<typename T>
-    HeapSorter<T>::~HeapSorter() = default;
+    QuickSorter<T>::~QuickSorter() = default;
 }
-
 #endif

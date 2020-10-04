@@ -39,6 +39,8 @@ namespace array {
 
         unsigned int length() override;
 
+        Array<T> &getRawData();
+
         typename Array<T>::ArrayIterator begin();
 
         typename Array<T>::ArrayIterator end();
@@ -137,6 +139,11 @@ namespace array {
     template<typename T>
     typename Array<T>::ArrayIterator ArraySequence<T>::end() {
         return this->data.end();
+    }
+
+    template<typename T>
+    Array<T> &ArraySequence<T>::getRawData() {
+        return this->data;
     }
 }
 

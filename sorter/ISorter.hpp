@@ -3,6 +3,9 @@
 
 #include "Sequence.hpp"
 #include "iostream"
+#include <string>
+#include "ArraySequence.hpp"
+#include "LinkedListSequence.hpp"
 
 namespace sorter {
     template<typename T>
@@ -15,11 +18,15 @@ namespace sorter {
 
         void shuffle(sequence::Sequence<T> *seq, unsigned int (*randomFunc)(unsigned int i));
 
+        sequence::Sequence<T> *getRandomSequence(sequence::Sequence<T> *seq, T (*randomFunc)(unsigned int i), unsigned int size);
+
         virtual sequence::Sequence<T> *sort(sequence::Sequence<T> *seq, bool (*cmp) (T value1, T value2)) = 0;
 
         unsigned int getCntIterations();
 
-        unsigned int getNumberOfIterationSeconds();
+        unsigned int getNumberOfIterationMilliseconds();
+
+        virtual void writeMetricsInFile(unsigned int startNumberOfElems, unsigned int endNumberOfElems, unsigned int step, std::string filePath) = 0;
 
         void resetMetrics();
 
@@ -45,7 +52,7 @@ namespace sorter {
     }
 
     template<typename T>
-    unsigned int ISorter<T>::getNumberOfIterationSeconds() {
+    unsigned int ISorter<T>::getNumberOfIterationMilliseconds() {
         return this->numberOfIterationMilliseconds;
     }
 
@@ -54,6 +61,16 @@ namespace sorter {
         this->cntIterations = 0;
         this->numberOfIterationMilliseconds = 0;
     }
+
+    template<typename T>
+    sequence::Sequence<T> *
+    ISorter<T>::getRandomSequence(sequence::Sequence<T> *seq, T (*randomFunc)(unsigned int), unsigned int size) {
+        for (unsigned int i = 0; i < size; ++i) {
+            seq->append(randomFunc(i));
+        }
+        return seq;
+    }
+
 
 }
 #endif
