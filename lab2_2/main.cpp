@@ -1,6 +1,13 @@
-#include <iostream>
+#include "GameField.hpp"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    GameFiled game(nullptr, 3, 120);
+
+    game.setFixedSize(400, 400);
+    game.setWindowTitle("Tic-Tac-Toe");
+    game.show();
+
+    return app.exec();
 }
