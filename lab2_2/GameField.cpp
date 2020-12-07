@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include "GameField.hpp"
 
-GameFiled::GameFiled(QWidget *parent, unsigned int gridSize, char startSymbol) : QWidget(parent) {
-    this->filedButtons.setShape(std::make_pair(gridSize, gridSize));
+GameFiled::GameFiled(QWidget *mainWindow, unsigned int gridSize, char startSymbol){
+    this->fieldButtons.setShape(std::make_pair(gridSize, gridSize));
     this->gridSize = gridSize;
     this->inGame = true;
     this->startSymbol = startSymbol;
@@ -13,19 +13,21 @@ GameFiled::GameFiled(QWidget *parent, unsigned int gridSize, char startSymbol) :
     this->cntMoves = 0;
     this->isQuitButtonAppeared = false;
     this->isForcedExit = true;
+    this->isAlreadyWaited = false;
+    this->mainWindow = mainWindow;
     this->ai = new Minimax(this->getNextSymbol(startSymbol), gridSize);
     for (unsigned int i = 0; i < this->gridSize; ++i) {
         for (unsigned int j = 0; j < this->gridSize; ++j) {
-            this->filedButtons[i][j] = new QPushButton(QString(this->symbols.blank), this);
-            this->filedButtons[i][j].getValue()->setFixedSize(100, 100);
-            QFont font = this->filedButtons[i][j].getValue()->font();
+            this->fieldButtons[i][j] = new QPushButton(QString(this->symbols.blank), this);
+            this->fieldButtons[i][j].getValue()->setFixedSize(this->width() / this->gridSize, this->height() / this->gridSize);
+            QFont font = this->fieldButtons[i][j].getValue()->font();
             font.setPointSize(40);
-            this->filedButtons[i][j].getValue()->setFont(font);
-            this->filedButtons[i][j].getValue()->setStyleSheet("QPushButton{color: white; background: transparent;}");
+            this->fieldButtons[i][j].getValue()->setFont(font);
+            this->fieldButtons[i][j].getValue()->setStyleSheet("QPushButton{color: white; background: transparent;}");
         }
     }
     this->gameMessage = new QLabel("The game started");
-    this->errorMessage = new QLabel("Error: null");
+    this->errorMessage = new QLabel("Error: none");
     this->gameMessage->setStyleSheet("QLabel{color: white;}");
     this->errorMessage->setStyleSheet("QLabel{color: white;}");
     this->gameMessage->setWordWrap(true);
@@ -35,7 +37,7 @@ GameFiled::GameFiled(QWidget *parent, unsigned int gridSize, char startSymbol) :
     auto *gameGrid = new QGridLayout(this);
     for (unsigned int i = 0; i < this->gridSize; ++i) {
         for (unsigned int j = 0; j < this->gridSize; ++j) {
-            gameGrid->addWidget(this->filedButtons[i][j], (int) i, (int) j);
+            gameGrid->addWidget(this->fieldButtons[i][j], (int) i, (int) j);
         }
     }
     gameGrid->addWidget(this->gameMessage, (int) this->gridSize, 0, (int) this->gridSize, (int) this->gridSize,
@@ -46,18 +48,35 @@ GameFiled::GameFiled(QWidget *parent, unsigned int gridSize, char startSymbol) :
     this->setLayout(gameGrid);
     for (unsigned int i = 0; i < this->gridSize; ++i) {
         for (unsigned int j = 0; j < this->gridSize; ++j) {
-            GameFiled::connect(this->filedButtons[i][j].getValue(), &QPushButton::clicked, this, &GameFiled::OnClick);
+            GameFiled::connect(this->fieldButtons[i][j].getValue(), &QPushButton::clicked, this,
+                               &GameFiled::OnGameButtonClick);
         }
     }
 }
 
-void GameFiled::OnClick() {
+void GameFiled::OnGameButtonClick() {
     auto button = qobject_cast<QPushButton *>(sender());
     if (this->errorMessage->text() == "Error: This cell is already occupied") {
-        this->errorMessage->setText("Error: null");
+        this->errorMessage->setText("Error: none");
     }
     if (button->text() == QString(this->symbols.blank)) {
+        auto previousMat = this->getCurrentStateOfGameGrid();
         button->setText(QString(this->currentSymbol));
+        auto currentMat = this->getCurrentStateOfGameGrid();
+        unsigned int pos;
+        bool isPosChanged = false;
+        for (unsigned int i = 0; i < this->gridSize; ++i) {
+            for (unsigned int j = 0; j < this->gridSize; ++j) {
+                if (previousMat[i][j] != currentMat[i][j]) {
+                    pos = i * this->gridSize + j;
+                    isPosChanged = true;
+                    break;
+                }
+            }
+            if (isPosChanged) {
+                break;
+            }
+        }
         this->currentSymbol = this->getNextSymbol(this->currentSymbol);
         if (this->currentSymbol == this->startSymbol) {
             this->gameMessage->setText("The move of the first player");
@@ -70,7 +89,7 @@ void GameFiled::OnClick() {
         } else {
             this->gameMessage->setText("The move of the second player");
         }
-        this->makeMove();
+        this->makeMove(pos);
     } else {
         this->errorMessage->setText("Error: This cell is already occupied");
     }
@@ -83,7 +102,7 @@ void GameFiled::paintEvent(QPaintEvent *paintEvent) {
     if (this->inGame && this->checkWin()) {
         QPainter painter(this);
         this->gameOver(painter,
-                       this->currentSymbol == this->symbols.x ? this->gameOutcome.winX : this->gameOutcome.winO);
+                       this->currentSymbol == this->symbols.x ? this->gameOutcome.winO : this->gameOutcome.winX);
     } else if (this->inGame && this->checkDraw()) {
         QPainter painter(this);
         this->gameOver(painter, this->gameOutcome.draw);
@@ -96,8 +115,8 @@ bool GameFiled::checkWin() {
         for (unsigned int i = 0; i < this->gridSize; ++i) {
             bool isWin = true;
             for (unsigned int j = 1; j < this->gridSize; ++j) {
-                if (this->filedButtons[i][j].getValue()->text() != this->filedButtons[i][0].getValue()->text() ||
-                    this->filedButtons[i][0].getValue()->text() == QString(
+                if (this->fieldButtons[i][j].getValue()->text() != this->fieldButtons[i][0].getValue()->text() ||
+                    this->fieldButtons[i][0].getValue()->text() == QString(
                             this->symbols.blank)) {
                     isWin = false;
                     break;
@@ -106,7 +125,7 @@ bool GameFiled::checkWin() {
             if (isWin) {
                 this->inGame = false;
                 for (unsigned int j = 0; j < this->gridSize; ++j) {
-                    this->filedButtons[i][j].getValue()->setStyleSheet(
+                    this->fieldButtons[i][j].getValue()->setStyleSheet(
                             "QPushButton{color: red; background: transparent;}");
                 }
                 auto *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
@@ -118,8 +137,8 @@ bool GameFiled::checkWin() {
         for (unsigned int j = 0; j < this->gridSize; ++j) {
             bool isWin = true;
             for (unsigned int i = 1; i < this->gridSize; ++i) {
-                if (this->filedButtons[i][j].getValue()->text() != this->filedButtons[0][j].getValue()->text() ||
-                    this->filedButtons[0][j].getValue()->text() == QString(this->symbols.blank)) {
+                if (this->fieldButtons[i][j].getValue()->text() != this->fieldButtons[0][j].getValue()->text() ||
+                    this->fieldButtons[0][j].getValue()->text() == QString(this->symbols.blank)) {
                     isWin = false;
                     break;
                 }
@@ -127,7 +146,7 @@ bool GameFiled::checkWin() {
             if (isWin) {
                 this->inGame = false;
                 for (unsigned int i = 0; i < this->gridSize; ++i) {
-                    this->filedButtons[i][j].getValue()->setStyleSheet(
+                    this->fieldButtons[i][j].getValue()->setStyleSheet(
                             "QPushButton{color: red; background: transparent;}");
                 }
                 auto *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
@@ -138,8 +157,8 @@ bool GameFiled::checkWin() {
         }
         bool isWin = true;
         for (unsigned int i = 1; i < this->gridSize; ++i) {
-            if (this->filedButtons[i][i].getValue()->text() != this->filedButtons[0][0].getValue()->text() ||
-                this->filedButtons[0][0].getValue()->text() == QString(this->symbols.blank)) {
+            if (this->fieldButtons[i][i].getValue()->text() != this->fieldButtons[0][0].getValue()->text() ||
+                this->fieldButtons[0][0].getValue()->text() == QString(this->symbols.blank)) {
                 isWin = false;
                 break;
             }
@@ -147,7 +166,7 @@ bool GameFiled::checkWin() {
         if (isWin) {
             this->inGame = false;
             for (unsigned int i = 0; i < this->gridSize; ++i) {
-                this->filedButtons[i][i].getValue()->setStyleSheet("QPushButton{color: red; background: transparent;}");
+                this->fieldButtons[i][i].getValue()->setStyleSheet("QPushButton{color: red; background: transparent;}");
             }
             auto *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
             QCoreApplication::postEvent (this, event);
@@ -156,9 +175,9 @@ bool GameFiled::checkWin() {
         }
         isWin = true;
         for (unsigned int i = 1; i < this->gridSize; ++i) {
-            if (this->filedButtons[i][this->gridSize - 1 - i].getValue()->text() !=
-                this->filedButtons[0][this->gridSize - 1].getValue()->text() ||
-                this->filedButtons[0][this->gridSize - 1].getValue()->text() == QString(this->symbols.blank)) {
+            if (this->fieldButtons[i][this->gridSize - 1 - i].getValue()->text() !=
+                this->fieldButtons[0][this->gridSize - 1].getValue()->text() ||
+                this->fieldButtons[0][this->gridSize - 1].getValue()->text() == QString(this->symbols.blank)) {
                 isWin = false;
                 break;
             }
@@ -166,7 +185,7 @@ bool GameFiled::checkWin() {
         if (isWin) {
             this->inGame = false;
             for (unsigned int i = 0; i < this->gridSize; ++i) {
-                this->filedButtons[i][this->gridSize - 1 - i].getValue()->setStyleSheet(
+                this->fieldButtons[i][this->gridSize - 1 - i].getValue()->setStyleSheet(
                         "QPushButton{color: red; background: transparent;}");
             }
             auto *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
@@ -213,8 +232,7 @@ void GameFiled::gameOver(QPainter &painter, unsigned int reason) {
     painter.setPen(QColor(Qt::yellow));
     painter.setFont(font);
 
-
-    painter.translate(QPoint(w / 2, h / 2));
+    painter.translate(QPoint(w / 2, this->gameMessage->y()));
     painter.drawText(-textWidthMessage / 2, 0, message);
     painter.drawText(-textWidthSubMessage / 2, 25, subMessage);
 }
@@ -233,6 +251,11 @@ char GameFiled::getNextSymbol(char symbol) {
 }
 
 bool GameFiled::checkDraw() {
+    if (this->cntMoves >= this->gridSize * this->gridSize) {
+        auto *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
+        QCoreApplication::postEvent(this, event);
+        this->isForcedExit = false;
+    }
     return this->cntMoves >= this->gridSize * this->gridSize;
 }
 
@@ -241,7 +264,7 @@ void GameFiled::finish() {
         auto *quitButton = new QPushButton("Quit", this);
         quitButton->setGeometry(50, 40, 75, 30);
         this->layout()->addWidget(quitButton);
-        GameFiled::connect(quitButton, &QPushButton::clicked, this, &QApplication::quit);
+        GameFiled::connect(quitButton, &QPushButton::clicked, this, &GameFiled::OnQuitButtonClick);
         this->isQuitButtonAppeared = true;
     }
 }
@@ -254,8 +277,9 @@ void GameFiled::keyPressEvent(QKeyEvent *keyEvent) {
     int key = keyEvent->key();
     if (key == Qt::Key_Escape) {
         this->repaint();
-        if (!this->isForcedExit) {
+        if (!this->isForcedExit && !this->isAlreadyWaited) {
             sleep(5);
+            this->isAlreadyWaited = true;
         }
         this->finish();
     }
@@ -266,15 +290,15 @@ matrix::Matrix<char> GameFiled::getCurrentStateOfGameGrid() {
     matrix::Matrix<char> mat(this->gridSize, this->gridSize);
     for (unsigned int i = 0; i < this->gridSize; ++i) {
         for (unsigned int j = 0; j < this->gridSize; ++j) {
-            mat[i][j] = (char) this->filedButtons[i][j].getValue()->text().toStdString()[0];
+            mat[i][j] = (char) this->fieldButtons[i][j].getValue()->text().toStdString()[0];
         }
     }
     return mat;
 }
 
-void GameFiled::makeMove() {
-    int move = this->ai->getBestMove(this->getCurrentStateOfGameGrid());
-    this->filedButtons[move / this->gridSize][move % this->gridSize].getValue()->setText(QString(this->currentSymbol));
+void GameFiled::makeMove(unsigned int previousPos) {
+    int move = this->ai->getBestMove(this->getCurrentStateOfGameGrid(), previousPos);
+    this->fieldButtons[move / this->gridSize][move % this->gridSize].getValue()->setText(QString(this->currentSymbol));
     this->currentSymbol = this->getNextSymbol(this->currentSymbol);
     if (this->currentSymbol == this->startSymbol) {
         this->gameMessage->setText("The move of the first player");
@@ -283,4 +307,9 @@ void GameFiled::makeMove() {
     }
     ++this->cntMoves;
     this->repaint();
+}
+
+void GameFiled::OnQuitButtonClick() {
+    this->close();
+    this->mainWindow->show();
 }

@@ -50,8 +50,8 @@ namespace list {
 
         bool operator==(const LinkedList<T> &list);
 
-        template<typename T1>
-        friend std::ostream &operator<<(std::ostream &out, const LinkedList<T1> &list);
+//        template<typename T1>
+//        friend std::ostream &operator<<(std::ostream &out, const LinkedList<T1> &list);
 
         class LinkedListIterator {
         private:
@@ -148,26 +148,26 @@ namespace list {
         ++this->size;
     }
 
-    template<typename T1>
-    std::ostream &operator<<(std::ostream &out, const LinkedList<T1> &list) {
-        if (list.size != 0) {
-            auto buffPtr = list.headPtr;
-            out << "[";
-            unsigned int i = 0;
-            while (buffPtr != nullptr) {
-                if (i != list.size - 1) {
-                    out << buffPtr->getValue() << ", ";
-                } else {
-                    out << buffPtr->getValue() << "]";
-                }
-                ++i;
-                buffPtr = buffPtr->getNextPtr();
-            }
-        } else {
-            out << "[]";
-        }
-        return out;
-    }
+//    template<typename T1>
+//    std::ostream &operator<<(std::ostream &out, const LinkedList<T1> &list) {
+//        if (list.size != 0) {
+//            auto buffPtr = list.headPtr;
+//            out << "[";
+//            unsigned int i = 0;
+//            while (buffPtr != nullptr) {
+//                if (i != list.size - 1) {
+//                    out << buffPtr->getValue() << ", ";
+//                } else {
+//                    out << buffPtr->getValue() << "]";
+//                }
+//                ++i;
+//                buffPtr = buffPtr->getNextPtr();
+//            }
+//        } else {
+//            out << "[]";
+//        }
+//        return out;
+//    }
 
     template<typename T>
     LinkedList<T>::LinkedList(T *mas, unsigned int size) {

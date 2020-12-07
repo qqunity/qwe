@@ -144,3 +144,15 @@ const char *exceptions::GameException::what() const noexcept {
 }
 
 exceptions::GameException::~GameException() = default;
+
+exceptions::SparseVectorException::SparseVectorException(const std::string& errMessage, int line, const std::string& file) {
+    this->errorMessage = "-Error in line " + std::to_string(line) +
+                         " in file" + file + "-\t-" +
+                         " Message: " + errMessage + "-";
+}
+
+const char *exceptions::SparseVectorException::what() const noexcept {
+    return this->errorMessage.c_str();
+}
+
+exceptions::SparseVectorException::~SparseVectorException() = default;

@@ -26,7 +26,7 @@ namespace array {
 
         operator T() override;
 
-        template<typename T1> friend std::ostream& operator<< (std::ostream &out, const ArrayElement<T1> &arrEl);
+//        template<typename T1> friend std::ostream& operator<< (std::ostream &out, const ArrayElement<T1> &arrEl);
 
         ~ArrayElement();
     };
@@ -89,15 +89,15 @@ namespace array {
         }
     }
 
-    template<typename T1>
-    std::ostream &operator<<(std::ostream &out, const ArrayElement<T1> &arrEl) {
-        if (arrEl.hasValue) {
-            out << arrEl.value;
-        } else {
-            out << "null";
-        }
-        return out;
-    }
+//    template<typename T1>
+//    std::ostream &operator<<(std::ostream &out, const ArrayElement<T1> &arrEl) {
+//        if (arrEl.hasValue) {
+//            out << arrEl.value;
+//        } else {
+//            out << "null";
+//        }
+//        return out;
+//    }
 
     template<typename T>
     ArrayElement<T>::~ArrayElement() = default;

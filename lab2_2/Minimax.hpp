@@ -20,11 +20,15 @@ public:
 
     std::vector<unsigned int> getAvailSpots(matrix::Matrix<char> mat);
 
+    std::vector<unsigned int> getAvailSpots(unsigned int pos);
+
+    std::vector<unsigned int> getAvailSpotsWithConstraint(unsigned int pos);
+
     char getOppositeSymbol(char symbol);
 
-    int minimax(matrix::Matrix<char> mat, char symbol);
+    int minimax(matrix::Matrix<char> mat, char symbol, unsigned int previousPos);
 
-    unsigned int getBestMove(matrix::Matrix<char> mat);
+    unsigned int getBestMove(matrix::Matrix<char> mat, unsigned int previousPos);
 
     ~Minimax();
 };

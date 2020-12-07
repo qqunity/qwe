@@ -47,7 +47,7 @@ namespace dictionary {
 
         bool operator<(const KVElement<K, V> &kvEl);
 
-        template<typename K1, typename V1> friend std::ostream& operator<< (std::ostream &out, KVElement<K1, V1> &kvEl);
+//        template<typename K1, typename V1> friend std::ostream& operator<< (std::ostream &out, KVElement<K1, V1> &kvEl);
     };
 
     template<typename K, typename V>
@@ -153,15 +153,15 @@ namespace dictionary {
         }
     }
 
-    template<typename K1, typename V1>
-    std::ostream &operator<<(std::ostream &out, KVElement<K1, V1> &kvEl) {
-        if (kvEl.hasValue && kvEl.hasKey) {
-            out << kvEl.key << ": " << kvEl.value;
-        } else {
-            out << "null";
-        }
-        return out;
-    }
+//    template<typename K1, typename V1>
+//    std::ostream &operator<<(std::ostream &out, KVElement<K1, V1> &kvEl) {
+//        if (kvEl.hasValue && kvEl.hasKey) {
+//            out << kvEl.key << ": " << kvEl.value;
+//        } else {
+//            out << "null";
+//        }
+//        return out;
+//    }
 
     template<typename K, typename V>
     void KVElement<K, V>::setKV(K key, V value) {

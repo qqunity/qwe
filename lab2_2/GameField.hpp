@@ -23,7 +23,7 @@ class GameFiled : public QWidget {
 Q_OBJECT
 
 public:
-    explicit GameFiled(QWidget *parent = nullptr, unsigned int gridSize = 3, char startSymbol = 120);
+    explicit GameFiled(QWidget *mainWindow = nullptr, unsigned int gridSize = 3, char startSymbol = 120);
 
     bool checkWin();
 
@@ -43,7 +43,7 @@ private:
 
     matrix::Matrix<char> getCurrentStateOfGameGrid();
 
-    void makeMove();
+    void makeMove(unsigned int previousPos);
 
 protected:
     void paintEvent(QPaintEvent *paintEvent) override;
@@ -52,12 +52,15 @@ protected:
 
 private slots:
 
-    void OnClick();
+    void OnGameButtonClick();
+
+    void OnQuitButtonClick();
 
 private:
     QLabel *gameMessage;
+    QWidget *mainWindow;
     QLabel *errorMessage;
-    matrix::Matrix<QPushButton *> filedButtons;
+    matrix::Matrix<QPushButton *> fieldButtons;
     Symbols symbols;
     GameOutcome gameOutcome;
     Minimax *ai;
@@ -67,6 +70,7 @@ private:
     char currentSymbol;
     char startSymbol;
     bool isForcedExit;
+    bool isAlreadyWaited;
     bool isQuitButtonAppeared;
 };
 

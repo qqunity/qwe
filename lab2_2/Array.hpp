@@ -34,7 +34,7 @@ namespace array {
 
         void resize(unsigned int size);
 
-        int length();
+        unsigned int length();
 
         ArrayElement<T> *getFirst();
 
@@ -114,8 +114,8 @@ namespace array {
 
         ArrayIterator end();
 
-        template<typename T1>
-        friend std::ostream &operator<<(std::ostream &out, const Array<T1> &arr);
+//        template<typename T1>
+//        friend std::ostream &operator<<(std::ostream &out, const Array<T1> &arr);
     };
 
     template<typename T>
@@ -168,22 +168,22 @@ namespace array {
     template<typename T>
     Array<T>::~Array() = default;
 
-    template<typename T1>
-    std::ostream &operator<<(std::ostream &out, const Array<T1> &arr) {
-        if (arr.size != 0) {
-            out << "[";
-            for (int i = 0; i < arr.size; ++i) {
-                if (i == arr.size - 1) {
-                    out << arr.data[i] << "]";
-                } else {
-                    out << arr.data[i] << ", ";
-                }
-            }
-        } else {
-            out << "[]";
-        }
-        return out;
-    }
+//    template<typename T1>
+//    std::ostream &operator<<(std::ostream &out, const Array<T1> &arr) {
+//        if (arr.size != 0) {
+//            out << "[";
+//            for (int i = 0; i < arr.size; ++i) {
+//                if (i == arr.size - 1) {
+//                    out << arr.data[i] << "]";
+//                } else {
+//                    out << arr.data[i] << ", ";
+//                }
+//            }
+//        } else {
+//            out << "[]";
+//        }
+//        return out;
+//    }
 
     template<typename T>
     Array<T>::Array(T *mas, unsigned int size) {
@@ -231,7 +231,7 @@ namespace array {
     }
 
     template<typename T>
-    int Array<T>::length() {
+    unsigned int Array<T>::length() {
         return this->size;
     }
 

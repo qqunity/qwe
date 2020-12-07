@@ -37,7 +37,7 @@ namespace list {
 
         operator T() override;
 
-        template<typename T1> friend std::ostream& operator<< (std::ostream &out, const ListElement<T1> &listEL);
+//        template<typename T1> friend std::ostream& operator<< (std::ostream &out, const ListElement<T1> &listEL);
 
         ~ListElement();
     };
@@ -130,15 +130,15 @@ namespace list {
         }
     }
 
-    template<typename T1>
-    std::ostream &operator<<(std::ostream &out, const ListElement<T1> &listEl) {
-        if (listEl.hasValue) {
-            out << listEl.value;
-        } else {
-            out << "null";
-        }
-        return out;
-    }
+//    template<typename T1>
+//    std::ostream &operator<<(std::ostream &out, const ListElement<T1> &listEl) {
+//        if (listEl.hasValue) {
+//            out << listEl.value;
+//        } else {
+//            out << "null";
+//        }
+//        return out;
+//    }
 
     template<typename T>
     ListElement<T>::~ListElement() = default;

@@ -137,6 +137,17 @@ namespace exceptions {
 
         ~GameException() override;
     };
+
+    class SparseVectorException : public std::exception {
+    private:
+        std::string errorMessage;
+    public:
+        explicit SparseVectorException(const std::string& errMessage, int line, const std::string& file);
+
+        [[nodiscard]] const char *what() const noexcept override;
+
+        ~SparseVectorException() override;
+    };
 }
 
 
