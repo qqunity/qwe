@@ -1,0 +1,4 @@
+/Users/denis.maksimov/CLionProjects/qwe/lab2_3/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/Users/denis.maksimov/CLionProjects/qwe/lab2_3/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/denis.maksimov/CLionProjects/qwe/lab2_3/cmake-build-release/CMakeFiles/lab2_3.dir
+/Users/denis.maksimov/CLionProjects/qwe/lab2_3/cmake-build-release/CMakeFiles/lab2_3_autogen.dir
